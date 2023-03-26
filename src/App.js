@@ -4,15 +4,19 @@ import Cards from './components/Cards.jsx'
 import SearchBar from './components/SearchBar.jsx'
 import characters, { Rick } from './data.js'
 
-function App () {
+export default function App () {
+  const cardProps = {
+    name: Rick.name,
+    species: Rick.species,
+    gender: Rick.gender,
+    image: Rick.image
+  };
+
   return (
     <div className='App' style={{ padding: '25px' }}>
       <div>
         <Card
-          name={Rick.name}
-          species={Rick.species}
-          gender={Rick.gender}
-          image={Rick.image}
+          args={cardProps}
           onClose={() => window.alert('Emulamos que se cierra la card')}
         />
       </div>
@@ -29,7 +33,5 @@ function App () {
         />
       </div>
     </div>
-  )
+  );
 }
-
-export default App
