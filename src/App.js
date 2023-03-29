@@ -13,25 +13,20 @@ export default function App () {
   };
 
   return (
-    <div className='App' style={{ padding: '25px' }}>
-      <div>
-        <Card
-          args={cardProps}
-          onClose={() => window.alert('Emulamos que se cierra la card')}
-        />
-      </div>
+    <section className='App' style={{ padding: '25px' }}>
+      <header>
+        <SearchBar onSearch={(characterID) => window.alert(characterID)} />
+      </header>
+
       <hr />
-      <div>
-        <Cards
-          characters={characters}
-        />
-      </div>
-      <hr />
-      <div>
-        <SearchBar
-          onSearch={(characterID) => window.alert(characterID)}
-        />
-      </div>
-    </div>
+
+      <main>
+        <Card args={cardProps} />
+        
+        <hr />
+
+        <Cards characters={characters} />
+      </main>
+    </section>
   );
 }

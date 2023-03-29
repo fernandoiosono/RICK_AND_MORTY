@@ -1,10 +1,11 @@
-import Card from './Card';
+import Card from "./Card";
+import styled from "styled-components";
 
 export default function Cards(props) {
    const { characters } = props;
 
    return (
-      <div>{
+      <SectionCards>{
          characters.map( c =>
             <Card key={c.id}
                args={{
@@ -13,6 +14,11 @@ export default function Cards(props) {
                   gender: c.gender,
                   image: c.image }} />
          )
-      }</div>
+      }</SectionCards>
    );
 }
+
+const SectionCards = styled.section`
+  display: flex; 
+  text-align: center;
+`;
