@@ -5,13 +5,13 @@ export default function Card(props) {
 
    return (
       <ArticleCard>
-         <HeaderCard>
+         <header>
             <H2NameCard> {name} </H2NameCard>
-            <BtnCloseCard onClick={() => window.alert('Emulamos que se cierra la card')}> X </BtnCloseCard>
-         </HeaderCard>
-         <MainCard>
+            <BtnCloseCard onClick={() => window.alert('Emulamos que se cierra la card')} style={{cursor: 'pointer'}}> X </BtnCloseCard>   
+         </header>
+         <main>
             <ImgCard src={image} alt="Rick Photo" />
-         </MainCard>
+         </main>
          <FooterCard>
             <H4Species> {species} </H4Species>
             <H4Gender> {gender} </H4Gender>
@@ -21,23 +21,17 @@ export default function Card(props) {
 }
 
 const ArticleCard = styled.article`
-  background-color: white;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.7);
   padding: 15px;
   margin: 15px;
   width: 205px;
   border-radius: 5px;
 `;
 
-const HeaderCard = styled.header``;
-
-const MainCard = styled.main``;
-
 const FooterCard = styled.footer`
    display: flex;
    padding-top: 10px;
    width: 100%;
-   white-space: nowrap;
 `;
 
 const H2NameCard = styled.h2` 

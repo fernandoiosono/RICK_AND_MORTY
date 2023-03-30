@@ -20,5 +20,6 @@ export default function Cards(props) {
 
 const SectionCards = styled.section`
   display: flex; 
-  text-align: center;
+  justify-content: center;
+  width: 100%;
 `;
