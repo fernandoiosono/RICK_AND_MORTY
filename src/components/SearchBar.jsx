@@ -4,7 +4,7 @@ export default function SearchBar(props) {
    return (
       <>
          <InputID type='search' />
-         <ButtonAdd onClick={props.onSearch} style={{cursor: 'pointer'}}> Agregar </ButtonAdd>
+         <ButtonAdd onClick={props.onSearch}> Agregar </ButtonAdd>
       </>
    );
 }
@@ -15,6 +15,10 @@ const InputID = styled.input`
    border-radius: 5px 0 0 5px;
    text-align: center;
    background: rgba(255, 255, 255, 0.7);
+
+   &:hover {
+      background: rgba(255, 255, 255, 1);
+   }
 `;
 
 const ButtonAdd = styled.button`
@@ -25,4 +29,10 @@ const ButtonAdd = styled.button`
    background-color: black;
    color: white;
    font-weight: bold;
+
+   &:hover {
+      cursor: pointer;
+      background-color: rgb(46, 204, 113);
+      color: black;
+   }
 `;

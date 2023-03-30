@@ -7,7 +7,7 @@ export default function Card(props) {
       <ArticleCard>
          <header>
             <H2NameCard> {name} </H2NameCard>
-            <BtnCloseCard onClick={() => window.alert('Emulamos que se cierra la card')} style={{cursor: 'pointer'}}> X </BtnCloseCard>   
+            <BtnCloseCard onClick={() => window.alert('Emulamos que se cierra la card')}> X </BtnCloseCard>   
          </header>
          <main>
             <ImgCard src={image} alt="Rick Photo" />
@@ -26,6 +26,10 @@ const ArticleCard = styled.article`
   margin: 15px;
   width: 205px;
   border-radius: 5px;
+
+  &:hover {
+   background: rgba(255, 255, 255, 1);
+  }
 `;
 
 const FooterCard = styled.footer`
@@ -45,6 +49,12 @@ const BtnCloseCard = styled.button`
    background-color: transparent;
    font-weight: bold;
    border-radius: 5px;
+
+   &:hover {
+      cursor: pointer;
+      background-color: red;
+      color: white;
+   }
 `;
 
 const H4Species = styled.h4`
