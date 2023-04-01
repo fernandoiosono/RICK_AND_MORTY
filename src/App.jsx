@@ -1,11 +1,11 @@
-import "./App.css";
+import "./css/App.css";
 import styled from "styled-components";
-import Card from "./components/Card.jsx";
-import Cards from "./components/Cards.jsx";
-import SearchBar from "./components/SearchBar.jsx";
-import characters, { Rick } from "./data.js";
+import Card from "./comps/Card.jsx";
+import Cards from "./comps/Cards.jsx";
+import SearchBar from "./comps/SearchBar.jsx";
+import characters, { Rick } from "./data/data.js";
 
-export default function App () {
+export default function App() {
   const cardProps = {
     name: Rick.name,
     species: Rick.species,
@@ -27,7 +27,7 @@ export default function App () {
         <Cards characters={characters} />
       </main>
     </SectionApp>
-  );
+  )
 }
 
 const DivPrincipalCard = styled.main`
