@@ -1,9 +1,8 @@
-import "./css/App.css";
+import Card from "./Card.jsx";
+import Cards from "./Cards.jsx";
 import styled from "styled-components";
-import Card from "./comps/Card.jsx";
-import Cards from "./comps/Cards.jsx";
-import SearchBar from "./comps/SearchBar.jsx";
-import characters, { Rick } from "./data/data.js";
+import SearchBar from "./SearchBar.jsx";
+import characters, { Rick } from "../data/data.js";
 
 export default function App() {
   const cardProps = {
