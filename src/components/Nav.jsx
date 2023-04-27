@@ -4,9 +4,7 @@ import SearchBar from "./SearchBar.jsx";
 export default function Nav(props) {
     return (
         <Navigation>
-            {/* <SearchBar onSearch={props.onSearch} /> */}
             <SearchBar />
-
         </Navigation>
     );
 }

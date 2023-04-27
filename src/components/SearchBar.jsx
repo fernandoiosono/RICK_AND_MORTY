@@ -1,15 +1,16 @@
 import styled from "styled-components";
 import { useEffect, useState, useRef, useContext } from "react";
-import { CharactersContext, FuncSearch } from "../js/contexts.js";
+import { CharactersContext, FnAddCharContext } from "../js/contexts.js";
 
-export default function SearchBar(props) {
+export default function SearchBar() {
    let inputVal = "";
 
    const inputSearch = useRef(null);
    const characters = useContext(CharactersContext);
+   const addNewChar = useContext(FnAddCharContext);
    const jsonTemplate = "https://rickandmortyapi.com/api/character/";
    
-   const [ idChar, setIdChar ] = useState(2);
+   const [ idChar, setIdChar ] = useState(0);
    const [ character, setCharacter ] = useState({
       idChar: 0,
       name: "",
@@ -19,7 +20,8 @@ export default function SearchBar(props) {
    });
 
    useEffect(() => {
-      fetch(jsonTemplate + idChar)
+      if (idChar !== 0) { // Evito que se ejecute cuando se monta
+         fetch(jsonTemplate + idChar)
          .then((response) => response.json())
          .then((data) =>
             setCharacter({
@@ -32,37 +34,37 @@ export default function SearchBar(props) {
             })
          )
          .catch((error) => console.log(error))
+      }
    }, [idChar]);
+
+   useEffect(() => {
+      if (character.idChar !== 0 && character.idChar !== undefined) {
+         addNewChar(character);
+         inputSearch.current.select();
+      }
+   }, [character]);
 
    function guardarID(event) {
       inputVal = event.target.value;
    }
 
    function searchChar() {
-      if (validateChar()) {
-         setIdChar(inputVal);
-
-         if (character.name !== undefined) {
-            // console.log(character);
-            // props.onSearch(character);
-         } else {
-            inputSearch.current.select();
-         }
-      } else {
-         inputSearch.current.select();
-      }
+      if (validateChar()) setIdChar(inputVal);
+      else inputSearch.current.select();
    }
 
    function validateChar() {
       let order = "Ingresa un número del 1 al 826.";
    
       switch (true) {
-         case (inputVal < 1 || inputVal > 826):
-            alert(`${order}`);
-            return false;
          case (isNaN(inputVal)):
             alert(`Este campo sólo acepta números por el momento. \n ${order}`);
             return false;
+
+         case (inputVal < 1 || inputVal > 826):
+            alert(`${order}`);
+            return false;
+
          case (characters.filter(char => char.idChar == inputVal).length > 0):
             alert("El personaje seleccionado ya existe, selecciona otro.");
             return false;

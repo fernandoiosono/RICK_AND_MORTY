@@ -10,7 +10,7 @@ export default function Card(props) {
             <BtnCloseCard onClick={() => window.alert('Emulamos que se cierra la card')}> X </BtnCloseCard>   
          </header>
          <main>
-            <ImgCard src={image} alt="Rick Photo" />
+            <ImgCard src={image} alt="Char Photo" />
          </main>
          <FooterCard>
             <H4Species> {species} </H4Species>

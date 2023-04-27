@@ -1,9 +1,8 @@
 import Nav from "./Nav.jsx";
 import Cards from "./Cards.jsx";
 import styled from "styled-components";
-import { CharactersContext, FuncSearch } from "../js/contexts.js";
-// import { useEffect, useState, useContext } from "react";
-import { useState } from "react";
+import { CharactersContext, FnAddCharContext } from "../js/contexts.js";
+import { useState, useEffect, useRef } from "react";
 
 export default function App() {
   const [ characters, setCharacters ] = useState([{
@@ -14,28 +13,23 @@ export default function App() {
     image: "https://rickandmortyapi.com/api/character/avatar/2.jpeg"
   }]);
 
-  function onSearch(data) {
-    // let arrChars = characters;
-    // arrChars.push(data);
-    // setCharacters(arrChars);
-
-    console.log(characters);
+  function addNewCharacter(char) {
+    setCharacters([...characters, char]);
   }
 
   return (
     <CharactersContext.Provider value={characters}>
-      <FuncSearch.Provider value={onSearch}>
         <SectionApp>
           <header>
-            {/* <Nav onSearch={onSearch}/> */}
+          <FnAddCharContext.Provider value={addNewCharacter}>
             <Nav />
+          </FnAddCharContext.Provider>
           </header>
           <Hr />
           <main>
             <Cards characters={characters} />
           </main>
         </SectionApp>
-      </FuncSearch.Provider>
     </CharactersContext.Provider>
   );
 }
