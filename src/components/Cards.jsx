@@ -7,8 +7,9 @@ export default function Cards(props) {
    return (
       <SectionCards>{
          characters.map( c =>
-            <Card key={c.id}
+            <Card key={c.idChar}
                args={{
+                  id: c.idChar,
                   name: c.name,
                   species: c.species,
                   gender: c.gender,

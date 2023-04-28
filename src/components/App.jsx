@@ -1,8 +1,8 @@
 import Nav from "./Nav.jsx";
 import Cards from "./Cards.jsx";
 import styled from "styled-components";
-import { CharactersContext, FnAddCharContext } from "../js/contexts.js";
-import { useState, useEffect, useRef } from "react";
+import { CharactersContext, FnAddNewCharContext, FnCloseCardContext } from "../js/contexts.js";
+import { useState } from "react";
 
 export default function App() {
   const [ characters, setCharacters ] = useState([{
@@ -17,17 +17,25 @@ export default function App() {
     setCharacters([...characters, char]);
   }
 
+  function closeCharCard(idChar) {
+    setCharacters((current) =>
+      current.filter((char) => char.idChar !== idChar)
+    )
+  }
+
   return (
     <CharactersContext.Provider value={characters}>
         <SectionApp>
           <header>
-          <FnAddCharContext.Provider value={addNewCharacter}>
+          <FnAddNewCharContext.Provider value={addNewCharacter}>
             <Nav />
-          </FnAddCharContext.Provider>
+          </FnAddNewCharContext.Provider>
           </header>
           <Hr />
           <main>
-            <Cards characters={characters} />
+            <FnCloseCardContext.Provider value={closeCharCard}>
+              <Cards characters={characters} />
+            </FnCloseCardContext.Provider>
           </main>
         </SectionApp>
     </CharactersContext.Provider>

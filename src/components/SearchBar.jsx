@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { useEffect, useState, useRef, useContext } from "react";
-import { CharactersContext, FnAddCharContext } from "../js/contexts.js";
+import { CharactersContext, FnAddNewCharContext } from "../js/contexts.js";
 
 export default function SearchBar() {
    let inputVal = "";
 
    const inputSearch = useRef(null);
    const characters = useContext(CharactersContext);
-   const addNewChar = useContext(FnAddCharContext);
+   const addNewChar = useContext(FnAddNewCharContext);
    const jsonTemplate = "https://rickandmortyapi.com/api/character/";
    
    const [ idChar, setIdChar ] = useState(0);
@@ -18,6 +18,8 @@ export default function SearchBar() {
       gender: "",
       image: ""
    });
+
+   const handleKeyDown = (event) => { if (event.key === "Enter") searchChar(); }
 
    useEffect(() => {
       if (idChar !== 0) { // Evito que se ejecute cuando se monta
@@ -40,9 +42,15 @@ export default function SearchBar() {
    useEffect(() => {
       if (character.idChar !== 0 && character.idChar !== undefined) {
          addNewChar(character);
-         inputSearch.current.select();
+
+         cleanInput();
       }
    }, [character]);
+
+   function cleanInput() {
+      inputSearch.current.value = "";
+      inputSearch.current.focus();
+   }
 
    function guardarID(event) {
       inputVal = event.target.value;
@@ -50,7 +58,7 @@ export default function SearchBar() {
 
    function searchChar() {
       if (validateChar()) setIdChar(inputVal);
-      else inputSearch.current.select();
+      else cleanInput();
    }
 
    function validateChar() {
@@ -75,7 +83,7 @@ export default function SearchBar() {
 
    return (
       <>
-         <InputID ref={inputSearch} type='search' onChange={guardarID}/>
+         <InputID ref={inputSearch} type='search' onChange={guardarID} onKeyDown={handleKeyDown} />
          <ButtonAdd onClick={searchChar}> Agregar </ButtonAdd>
       </>
    );

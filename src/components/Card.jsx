@@ -1,13 +1,16 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { FnCloseCardContext } from "../js/contexts.js";
 
 export default function Card(props) {
-   const { name, species, gender, image } = props.args;
+   const closeCard = useContext(FnCloseCardContext);
+   const { id, name, species, gender, image } = props.args;
 
    return (
       <ArticleCard>
          <header>
             <H2NameCard> {name} </H2NameCard>
-            <BtnCloseCard onClick={() => window.alert('Emulamos que se cierra la card')}> X </BtnCloseCard>   
+            <BtnCloseCard onClick={() => {closeCard(id)}}> X </BtnCloseCard>   
          </header>
          <main>
             <ImgCard src={image} alt="Char Photo" />
