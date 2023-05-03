@@ -2,7 +2,7 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { FnCloseCardContext } from "../js/contexts.js";
 
-export default function Card(props) {
+const Card = (props) => {
    const closeCard = useContext(FnCloseCardContext);
    const { id, name, species, gender, image } = props.args;
 
@@ -21,7 +21,7 @@ export default function Card(props) {
          </FooterCard>
       </ArticleCard>
    );
-}
+};
 
 const ArticleCard = styled.article`
   background: rgba(255, 255, 255, 0.7);
@@ -86,3 +86,5 @@ const ImgCard = styled.img`
   width: 98%;
   border-radius: 5px;
 `;
+
+export default Card;

@@ -1,7 +1,7 @@
 import Card from "./Card";
 import styled from "styled-components";
 
-export default function Cards(props) {
+const Cards = (props) => {
    const { characters } = props;
 
    return (
@@ -17,9 +17,11 @@ export default function Cards(props) {
          )
       }</SectionCards>
    );
-}
+};
 
 const SectionCards = styled.section`
   display: flex; 
   justify-content: center;
 `;
+
+export default Cards;

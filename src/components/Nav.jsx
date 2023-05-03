@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import SearchBar from "./SearchBar.jsx";
 
-export default function Nav(props) {
+const Nav = () => {
     return (
         <Navigation>
             <SearchBar />
         </Navigation>
     );
-}
+};
 
 const Navigation = styled.nav`
     padding: 10px;
@@ -16,3 +16,5 @@ const Navigation = styled.nav`
     display: flex;
     justify-content: right;
 `;
+
+export default Nav;

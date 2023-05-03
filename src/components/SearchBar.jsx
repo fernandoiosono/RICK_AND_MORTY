@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState, useRef, useContext } from "react";
 import { CharactersContext, FnAddNewCharContext } from "../js/contexts.js";
 
-export default function SearchBar() {
+const SearchBar = () => {
    let inputVal = "";
 
    const inputSearch = useRef(null);
@@ -21,10 +21,42 @@ export default function SearchBar() {
 
    const handleKeyDown = (event) => { if (event.key === "Enter") searchChar(); }
 
-   useEffect(() => { // componentDidMount
+   const cleanInput = () => {
+      inputSearch.current.value = "";
       inputSearch.current.focus();
-   }, []);
+   };
 
+   const guardarID = (event) => {
+      inputVal = event.target.value;
+   };
+
+   const searchChar = () => {
+      if (validateChar()) setIdChar(inputVal);
+      else cleanInput();
+   };
+
+   const validateChar = () => {
+      let order = "Ingresa un número del 1 al 826.";
+   
+      switch (true) {
+         case (isNaN(inputVal)):
+            alert(`Este campo sólo acepta números por el momento. \n ${order}`);
+            return false;
+
+         case (inputVal < 1 || inputVal > 826):
+            alert(`${order}`);
+            return false;
+
+         case (characters.filter(char => char.idChar == inputVal).length > 0):
+            alert("El personaje seleccionado ya existe, selecciona otro.");
+            return false;
+      }
+   
+      return true;
+   };
+
+   useEffect(() => { cleanInput() }, []); // componentDidMount => Focus en el Input
+   
    useEffect(() => {
       if (idChar !== 0) { // Evito que se ejecute cuando se monta
          fetch(jsonTemplate + idChar)
@@ -51,47 +83,13 @@ export default function SearchBar() {
       }
    }, [character]);
 
-   function cleanInput() {
-      inputSearch.current.value = "";
-      inputSearch.current.focus();
-   }
-
-   function guardarID(event) {
-      inputVal = event.target.value;
-   }
-
-   function searchChar() {
-      if (validateChar()) setIdChar(inputVal);
-      else cleanInput();
-   }
-
-   function validateChar() {
-      let order = "Ingresa un número del 1 al 826.";
-   
-      switch (true) {
-         case (isNaN(inputVal)):
-            alert(`Este campo sólo acepta números por el momento. \n ${order}`);
-            return false;
-
-         case (inputVal < 1 || inputVal > 826):
-            alert(`${order}`);
-            return false;
-
-         case (characters.filter(char => char.idChar == inputVal).length > 0):
-            alert("El personaje seleccionado ya existe, selecciona otro.");
-            return false;
-      }
-   
-      return true;
-   }
-
    return (
       <>
          <InputID ref={inputSearch} type='search' onChange={guardarID} onKeyDown={handleKeyDown} />
          <ButtonAdd onClick={searchChar}> Agregar </ButtonAdd>
       </>
    );
-}
+};
 
 const InputID = styled.input`
    height: 30px;
@@ -120,3 +118,5 @@ const ButtonAdd = styled.button`
       color: black;
    }
 `;
+
+export default SearchBar;

@@ -1,46 +1,45 @@
 import Nav from "./Nav.jsx";
 import Cards from "./Cards.jsx";
-import styled from "styled-components";
-import { CharactersContext, FnAddNewCharContext, FnCloseCardContext } from "../js/contexts.js";
+import About from "./About.jsx";
 import { useState } from "react";
+import styled from "styled-components";
+import { Routes, Route } from "react-router-dom";
+import { CharactersContext, FnAddNewCharContext, FnCloseCardContext } from "../js/contexts.js";
 
-export default function App() {
-  const [ characters, setCharacters ] = useState([{
-    idChar: 2,
-    name: "Morty Smith",
-    species: "Human",
-    gender: "Male",
-    image: "https://rickandmortyapi.com/api/character/avatar/2.jpeg"
-  }]);
+const App = () => {
+  const [ characters, setCharacters ] = useState([]);
 
-  function addNewCharacter(char) {
+  const addNewCharacter = (char) => {
     setCharacters([...characters, char]);
-  }
+  };
 
-  function closeCharCard(idChar) {
+  const closeCharCard = (idChar) => {
     setCharacters((current) =>
       current.filter((char) => char.idChar !== idChar)
     )
-  }
+  };
 
   return (
-    <CharactersContext.Provider value={characters}>
-        <SectionApp>
-          <header>
+    <SectionApp>
+      <header>
+        <CharactersContext.Provider value={characters}>
           <FnAddNewCharContext.Provider value={addNewCharacter}>
             <Nav />
           </FnAddNewCharContext.Provider>
-          </header>
-          <Hr />
-          <main>
-            <FnCloseCardContext.Provider value={closeCharCard}>
-              <Cards characters={characters} />
-            </FnCloseCardContext.Provider>
-          </main>
-        </SectionApp>
-    </CharactersContext.Provider>
+        </CharactersContext.Provider>
+        <Hr />
+      </header>
+      <main>
+        <FnCloseCardContext.Provider value={closeCharCard}>
+          <Routes>
+            <Route path="/" element={<Cards characters={characters} />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </FnCloseCardContext.Provider>
+      </main>
+    </SectionApp>
   );
-}
+};
 
 const SectionApp = styled.section`
   text-align: center;
@@ -51,3 +50,5 @@ const Hr = styled.hr`
   border-top: 3px solid black;
   border-bottom: none;
 `;
+
+export default App;
