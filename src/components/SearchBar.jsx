@@ -21,6 +21,10 @@ export default function SearchBar() {
 
    const handleKeyDown = (event) => { if (event.key === "Enter") searchChar(); }
 
+   useEffect(() => { // componentDidMount
+      inputSearch.current.focus();
+   }, []);
+
    useEffect(() => {
       if (idChar !== 0) { // Evito que se ejecute cuando se monta
          fetch(jsonTemplate + idChar)
