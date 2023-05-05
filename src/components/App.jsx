@@ -1,9 +1,13 @@
 import Nav from "./Nav.jsx";
 import Cards from "./Cards.jsx";
 import About from "./About.jsx";
+import CardDetail from "./CardDetail.jsx";
+import PageNotFound from "./PageNotFound.jsx";
+
 import { useState } from "react";
 import styled from "styled-components";
 import { Routes, Route } from "react-router-dom";
+
 import { CharactersContext, FnAddNewCharContext, FnCloseCardContext } from "../js/contexts.js";
 
 const App = () => {
@@ -32,8 +36,10 @@ const App = () => {
       <main>
         <FnCloseCardContext.Provider value={closeCharCard}>
           <Routes>
+            <Route path="*" element={<PageNotFound />} />
             <Route path="/" element={<Cards characters={characters} />} />
             <Route path="/about" element={<About />} />
+            <Route path="/carddetail/:id/:name/:species/:gender" element={<CardDetail />} />
           </Routes>
         </FnCloseCardContext.Provider>
       </main>
@@ -47,7 +53,7 @@ const SectionApp = styled.section`
 `;
 
 const Hr = styled.hr`
-  border-top: 3px solid black;
+  border-top: 2px solid black;
   border-bottom: none;
 `;
 

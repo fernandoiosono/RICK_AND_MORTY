@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { FnCloseCardContext } from "../js/contexts.js";
+import { Link } from "react-router-dom";
 
 const Card = (props) => {
    const closeCard = useContext(FnCloseCardContext);
@@ -9,7 +10,9 @@ const Card = (props) => {
    return (
       <ArticleCard>
          <header>
-            <H2NameCard> {name} </H2NameCard>
+            <Link to={`/carddetail/${id}/${name}/${species}/${gender}`} style={{ textDecoration: 'none', color: 'red'}}>
+               <H2NameCard> {name} </H2NameCard>
+            </Link>
             <BtnCloseCard onClick={() => {closeCard(id)}}> X </BtnCloseCard>   
          </header>
          <main>
@@ -43,6 +46,10 @@ const FooterCard = styled.footer`
 
 const H2NameCard = styled.h2` 
    float: left;
+
+   &:hover {
+      cursor: pointer;
+   }
 `;
 
 const BtnCloseCard = styled.button`

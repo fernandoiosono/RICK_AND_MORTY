@@ -96,7 +96,7 @@ const InputID = styled.input`
    border: 2px solid black;
    border-radius: 5px 0 0 5px;
    text-align: center;
-   background: rgba(255, 255, 255, 0.7);
+   background: rgba(255, 255, 255, 0.5);
 
    &:hover {
       background: rgba(255, 255, 255, 1);
