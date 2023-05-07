@@ -3,7 +3,7 @@ import SearchBar from "./SearchBar.jsx";
 import { Link } from "react-router-dom";
 
 const Nav = () => {
-    return (
+    return (<>
         <Navigation>
             <ArticleLinks>
                 <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
@@ -17,7 +17,8 @@ const Nav = () => {
                 <SearchBar />
             </ArticleSearch>
         </Navigation>
-    );
+        <Hr />
+    </>);
 };
 
 const Navigation = styled.nav`
@@ -61,6 +62,11 @@ const H3About = styled.h3`
         background-color: white;
         cursor: pointer;
     }
+`;
+
+const Hr = styled.hr`
+  border-top: 2px solid black;
+  border-bottom: none;
 `;
 
 export default Nav;
