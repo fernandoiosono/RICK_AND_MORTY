@@ -10,20 +10,20 @@ const Login = () => {
     const [ errors, setErrors ] = useState({ email: "", password: "" });
 
     const handleSubmit = (e) => {
+        const countEmptyFields = (Object.values(userData).filter(elmnt => elmnt === "").length);
+        const countErrors = (Object.values(errors).filter(elmnt => elmnt !== "").length); 
+
         e.preventDefault();
-        console.log(Object.values(errors).length);
 
-        // if (!Object.values(errors).length) {
-        if (validateUserData(userData, '', setErrors, errors)) {
-            // setInputs({ email: "", password: "" });
-            // setErrors({ email: "", password: "" });
-
+        if (countEmptyFields > 0) { // Si hay campos vacíos...
+            alert('Por Favor Llene Todos Los Campos!');
+        } else if (countErrors > 0) {
+            alert('Corrija los datos del formulario, para poder continuar!');
+        } else {
             fnHandleLogin(true);
             navigate("/home");
 
             alert('Bienvenido!!!');
-        } else {
-            alert('Por Favor Llene Todos Los Campos!');
         }
     };
 
@@ -59,9 +59,7 @@ const validateUserData = (userData, property, setErrors, errors) => {
     let error = "";
     const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{3}$/i;
 
-    if (!property) {
-        // Aquí entra cuando hace el submit sin modificar los campos anteriormente. URGE !!!
-    } else if (!userData[property]) {
+    if (!userData[property]) {
         error = `Por favor ingresa el ${property}.`;
     } else {
         switch (property) {
