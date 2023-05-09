@@ -19,6 +19,8 @@ const App = () => {
   const [ characters, setCharacters ] = useState([]);
   
   const handleLogin = (isAuth) => {
+    if (!isAuth) setCharacters([]);
+    
     setUserIsAuth(isAuth);
   };
 
@@ -39,7 +41,6 @@ const App = () => {
           <CharactersContext.Provider value={characters}>
             <FnAddNewCharContext.Provider value={addNewCharacter}>
               {userIsAuth ? <Nav /> : null}
-              {/* <Nav /> */}
             </FnAddNewCharContext.Provider>
           </CharactersContext.Provider>
         </header>

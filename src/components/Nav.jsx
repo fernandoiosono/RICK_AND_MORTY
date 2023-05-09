@@ -1,16 +1,29 @@
 import styled from "styled-components";
 import SearchBar from "./SearchBar.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthenticationContext } from "../js/contexts.js"
+import { useContext } from "react";
 
 const Nav = () => {
+    const navigate = useNavigate();
+    const fnHandleLogin = useContext(AuthenticationContext);
+
+    const handleLogOut = () => {
+        fnHandleLogin(false);
+        navigate("/");
+    };
+
     return (<>
         <Navigation>
             <ArticleLinks>
-                <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
+                <Link to="/home" style={{ textDecoration: 'none', color: 'black' }}>
                     <H3Home>Home</H3Home>
                 </Link>
                 <Link to="/about" style={{ textDecoration: 'none', color: 'black' }}>
                     <H3About>About</H3About>
+                </Link>
+                <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
+                    <H3LogOut onClick={handleLogOut}>LogOut</H3LogOut>
                 </Link>
             </ArticleLinks>
             <ArticleSearch>
@@ -54,12 +67,25 @@ const H3Home = styled.h3`
 `;
 
 const H3About = styled.h3`
+    margin-right: 10px;
     border: 1px solid black;
     border-radius: 5px;
     padding: 3px 20px 3px 20px;
 
     &:hover {
         background-color: white;
+        cursor: pointer;
+    }
+`;
+
+const H3LogOut = styled.h3`
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px 20px 3px 20px;
+
+    &:hover {
+        background-color: white;
+        color: red;
         cursor: pointer;
     }
 `;
