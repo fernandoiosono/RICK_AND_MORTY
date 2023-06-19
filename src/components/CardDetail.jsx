@@ -43,7 +43,7 @@ const CardDetail = () => {
 
     return (
         <DivDetail>
-            <BtnBack onClick={ () => {navigate("/")} }>Volver</BtnBack>
+            <BtnBack onClick={ () => {navigate("/home")} }>Volver</BtnBack>
             <ImgChar src={character.image} alt="Character Image" />
             <h1>Name</h1>
             <h3>{name}</h3>
