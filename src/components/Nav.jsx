@@ -56,7 +56,7 @@ const ArticleSearch = styled.article`
 
 const H3Home = styled.h3`
     margin-right: 10px;
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 5px;
     padding: 3px 20px 3px 20px;
 
@@ -68,7 +68,7 @@ const H3Home = styled.h3`
 
 const H3About = styled.h3`
     margin-right: 10px;
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 5px;
     padding: 3px 20px 3px 20px;
 
@@ -79,13 +79,13 @@ const H3About = styled.h3`
 `;
 
 const H3LogOut = styled.h3`
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 5px;
     padding: 3px 20px 3px 20px;
 
     &:hover {
-        background-color: white;
-        color: red;
+        background-color: red;
+        color: white;
         cursor: pointer;
     }
 `;
