@@ -17,13 +17,13 @@ const Nav = () => {
         <Navigation>
             <ArticleLinks>
                 <Link to="/home" style={{ textDecoration: 'none', color: 'black' }}>
-                    <H3Home>Home</H3Home>
+                    <H4Home>Home</H4Home>
                 </Link>
                 <Link to="/about" style={{ textDecoration: 'none', color: 'black' }}>
-                    <H3About>About</H3About>
+                    <H4About>About</H4About>
                 </Link>
                 <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
-                    <H3LogOut onClick={handleLogOut}>LogOut</H3LogOut>
+                    <H4LogOut onClick={handleLogOut}>LogOut</H4LogOut>
                 </Link>
             </ArticleLinks>
             <ArticleSearch>
@@ -54,11 +54,14 @@ const ArticleSearch = styled.article`
     justify-content: right;
 `;
 
-const H3Home = styled.h3`
+const H4Home = styled.h4`
     margin-right: 10px;
     border: 2px solid black;
     border-radius: 5px;
     padding: 3px 20px 3px 20px;
+    height: 25px;
+    align-items: center;
+    display: flex;
 
     &:hover {
         background-color: white;
@@ -66,11 +69,14 @@ const H3Home = styled.h3`
     }
 `;
 
-const H3About = styled.h3`
+const H4About = styled.h4`
     margin-right: 10px;
     border: 2px solid black;
     border-radius: 5px;
     padding: 3px 20px 3px 20px;
+    height: 25px;
+    align-items: center;
+    display: flex;
 
     &:hover {
         background-color: white;
@@ -78,10 +84,13 @@ const H3About = styled.h3`
     }
 `;
 
-const H3LogOut = styled.h3`
+const H4LogOut = styled.h4`
     border: 2px solid black;
     border-radius: 5px;
     padding: 3px 20px 3px 20px;
+    height: 25px;
+    align-items: center;
+    display: flex;
 
     &:hover {
         background-color: red;

@@ -86,7 +86,7 @@ const SearchBar = () => {
    return (
       <>
          <InputID ref={inputSearch} type='search' onChange={guardarID} onKeyDown={handleKeyDown} />
-         <ButtonAdd onClick={searchChar}> Agregar </ButtonAdd>
+         <ButtonAdd onClick={searchChar}> Add Card </ButtonAdd>
       </>
    );
 };
@@ -105,6 +105,7 @@ const InputID = styled.input`
 
 const ButtonAdd = styled.button`
    height: 30px;
+   width: 100px;
    border: 2px solid black;
    border-radius: 0 5px 5px 0;
    border-left: none;

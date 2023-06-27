@@ -51,7 +51,7 @@ const App = () => {
               <Route path="/" element={<Login />} />
               <Route path="/home" element={<Cards characters={characters} />} />
               <Route path="/about" element={<About />} />
-              <Route path="/carddetail/:id/:name/:species/:gender" element={<CardDetail />} />
+              <Route path="/carddetail/:id" element={<CardDetail />} />
             </Routes>
           </FnCloseCardContext.Provider>
         </main>
