@@ -32,14 +32,14 @@ const CardDetail = () => {
                 setCharacter({
                     ...character,
                     name: data.name,
-                    status: (data.status ? data.status : "Unknown"),
-                    species: (data.species ? data.species : "Unknown"),
-                    type: (data.type ? data.type : "Unknown"),
-                    gender: (data.gender ? data.gender : "Unknown"),
-                    origin: (data.origin.name ? data.origin.name : "Unknown"),
-                    location: (data.location.name ? data.location.name : "Unknown"),
+                    status: ((!data.status || data.status === "unknown") ? "Unknown" : data.status),
+                    species: ((!data.species || data.species === "unknown") ? "Unknown" : data.species),
+                    type: ((!data.type || data.type === "unknown") ? "Unknown" : data.type),
+                    gender: ((!data.gender || data.gender === "unknown") ? "Unknown" : data.gender),
+                    origin: ((!data.origin.name || data.origin.name === "unknown") ? "Unknown" : data.origin.name),
+                    location: ((!data.location.name || data.location.name === "unknown") ? "Unknown" : data.location.name),
                     image: data.image,
-                    created: (data.created ? data.created : "Unknown")
+                    created: ((!data.created || data.created === "unknown") ? "Unknown" : data.created)
                 })
             )
             .catch((error) => console.log(error));
@@ -50,10 +50,8 @@ const CardDetail = () => {
     return (
         <DivRow>
             <SectionImage>
-                <ImgChar src={character.image} alt="Character Image" />
-                <br />
                 <h1>{character.name}</h1>
-                <br />
+                <ImgChar src={character.image} alt="Character Image" />
                 <ButtonBack onClick={ () => {navigate("/home")} }>Volver</ButtonBack>
             </SectionImage>
             <SectionDetail>
@@ -150,6 +148,7 @@ const ImgChar = styled.img`
     width: 70%;
     border-radius: 5px;
     border: 2px solid black;
+    margin-bottom: 20px;
 `;
 
 const ButtonBack = styled.button`
