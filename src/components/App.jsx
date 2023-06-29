@@ -1,9 +1,10 @@
 import Nav from "./Nav.jsx";
+import Favs from "./Favs.jsx";
 import Cards from "./Cards.jsx";
 import About from "./About.jsx";
+import Login from "./Login.jsx";
 import CardDetail from "./CardDetail.jsx";
 import PageNotFound from "./PageNotFound.jsx";
-import Login from "./Login.jsx";
 
 import { useState } from "react";
 import styled from "styled-components";
@@ -50,6 +51,7 @@ const App = () => {
               <Route path="*" element={<PageNotFound />} />
               <Route path="/" element={<Login />} />
               <Route path="/home" element={<Cards characters={characters} />} />
+              <Route path="/favs" element={<Favs characters={characters} />} />
               <Route path="/about" element={<About />} />
               <Route path="/carddetail/:id" element={<CardDetail />} />
             </Routes>
