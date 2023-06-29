@@ -1,7 +1,9 @@
 const ADD_CHARACTER = "ADD_CHARACTER";
+const ADD_FAVORITE = "ADD_FAVORITE";
+const DEL_FAVORITE = "DEL_FAVORITE";
 
-export { ADD_CHARACTER };
-
-// module.exports = {
-//     ADD_CHARACTER
-// }
+export { 
+    ADD_CHARACTER,
+    ADD_FAVORITE,
+    DEL_FAVORITE
+};

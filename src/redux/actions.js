@@ -1,5 +1,25 @@
-import { ADD_CHARACTER } from "./actionTypes.js"
+import { 
+    ADD_CHARACTER, 
+    ADD_FAVORITE, 
+    DEL_FAVORITE } from "./actionTypes.js"
 
-const addCharacter = ADD_CHARACTER;
+const addCharacter = {
+    type: ADD_CHARACTER,
+    payload: []
+};
 
-export { addCharacter };
+const addFavorite = {
+    type: ADD_FAVORITE,
+    payload: []
+};
+
+const delFavorite = {
+    type: DEL_FAVORITE,
+    payload: 0
+};
+
+export { 
+    addCharacter,
+    addFavorite,
+    delFavorite
+};
