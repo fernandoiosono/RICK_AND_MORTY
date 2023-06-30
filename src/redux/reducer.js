@@ -1,5 +1,3 @@
-import { ADD_CHARACTER } from "./actionTypes.js";
-
 const initialState = {
 	characters: [],
 	favorites: [],

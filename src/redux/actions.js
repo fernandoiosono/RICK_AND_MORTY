@@ -1,7 +1,6 @@
-import { 
-    ADD_CHARACTER, 
-    ADD_FAVORITE, 
-    DEL_FAVORITE } from "./actionTypes.js"
+const ADD_CHARACTER = "ADD_CHARACTER";
+const ADD_FAVORITE = "ADD_FAVORITE";
+const DEL_FAVORITE = "DEL_FAVORITE";
 
 const addCharacter = {
     type: ADD_CHARACTER,
