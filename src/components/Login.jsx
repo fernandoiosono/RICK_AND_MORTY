@@ -45,17 +45,17 @@ const Login = () => {
                 <br />
                 <h1>Welcome Back!</h1>
                 <br />
-                <LblLogin htmlFor="email">Correo Electrónico:</LblLogin>
+                <LblLogin htmlFor="email">E-Mail:</LblLogin>
                 <br />
-                <InputLogin type="text" name="email" placeholder="Ingresa tu E-Mail..." value={userData.email} onChange={handleInputChange} />
+                <InputLogin type="text" name="email" placeholder="Enter Your E-Mail..." value={userData.email} onChange={handleInputChange} />
                 <PError>{errors.email}</PError>
                 <br />
-                <LblLogin htmlFor="password">Contraseña:</LblLogin>
+                <LblLogin htmlFor="password">Password:</LblLogin>
                 <br />
-                <InputLogin type="text" name="password" placeholder="Ingresa tu Contraseña..." value={userData.password} onChange={handleInputChange} />
+                <InputLogin type="text" name="password" placeholder="Enter Your Password..." value={userData.password} onChange={handleInputChange} />
                 <PError>{errors.password}</PError>
                 <br />
-                <BtnLogin type="submit">Ingresar</BtnLogin>
+                <BtnLogin type="submit">LogIn</BtnLogin>
             </FrmLogin>
         </DivLogin>
 	);

@@ -14,8 +14,6 @@ const SearchBar = () => {
    const [ character, setCharacter ] = useState({
       idChar: 0,
       name: "",
-      // species: "",
-      // gender: "",
       image: ""
    });
 
@@ -66,9 +64,8 @@ const SearchBar = () => {
                ...character,
                idChar: data.id,
                name: data.name,
-               // species: data.species,
-               // gender: data.gender,
-               image: data.image
+               image: data.image,
+               isFav: false
             })
          )
          .catch((error) => console.log(error))

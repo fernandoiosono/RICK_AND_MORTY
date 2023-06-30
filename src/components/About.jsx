@@ -6,7 +6,7 @@ const About = () => {
 			<h1>Rick & Morty Project</h1>
 
 			<section>
-				<ImgLeft src="../../img/rmcarcel.jpg" alt="rick&mortyJail" />
+				<ImgLeft src="../../img/rmjail.jpg" alt="rick&mortyJail" />
 				<PRight>
 					Rick Sánchez es un ejemplo del típico "científico loco". Es un genio, pero es irresponsable, alcohólico, egoísta, un poco depresivo y con
 					poca cordura. Rick por diferentes razones termina mudándose a la casa de su hija Beth y en ese momento se encuentra con su nieto Morty; un

@@ -1,36 +1,31 @@
-const getCharacters = {
+export const getCharacters = {
     type: "GET_CHARACTERS"
 };
 
-const getFavorites = {
+export const getFavorites = {
     type: "GET_FAVORITES"
 };
 
-const addCharacter = {
+export const addCharacter = {
     type: "ADD_CHARACTER",
     payload: []
 };
 
-const addFavorite = {
-    type: "ADD_FAVORITE",
-    payload: []
+export const addFavorite = (id, name, image) => {
+    return { 
+        type: "ADD_FAVORITE", 
+        payload: { id: id, name: name, image: image } 
+    };
 };
 
-const delCharacter = {
+export const delCharacter = {
     type: "DEL_CHARACTER",
     payload: 0
 };
 
-const delFavorite = {
-    type: "DEL_FAVORITE",
-    payload: 0
-};
-
-export { 
-    getCharacters,
-    getFavorites,
-    addCharacter,
-    addFavorite,
-    delCharacter,
-    delFavorite
+export const delFavorite = (id) => {
+    return {
+        type: "DEL_FAVORITE",
+        payload: id
+    };
 };

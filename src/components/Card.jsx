@@ -3,23 +3,40 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FnCloseCardContext } from "../js/contexts.js";
 import { addFavorite, delFavorite } from "../redux/actions.js"
+import { useSelector, useDispatch } from "react-redux";
 
 const Card = (props) => {
+	const dispatch = useDispatch();
 	const closeCard = useContext(FnCloseCardContext);
-	const { id, name, image } = props.args;
+	const { id, name, image, isFav } = props.args;
+
+	const handleFavorite = (isFavorite, id, name, image) => {
+		// console.log(isFavorite, id, name, image);
+		if (isFavorite) {
+			dispatch(delFavorite(id));
+		} else {
+			dispatch(addFavorite(id, name, image));
+		}
+	};
 
 	return (
 		<ArticleCard>
-			<HeaderCard>
-				<Link to={`/carddetail/${id}`} style={{ textDecoration: "none", color: "purple" }}>
+			<Link to={`/carddetail/${id}`} style={{ textDecoration: "none", color: "purple" }} title={id}>
+				<HeaderCard>
 					<PName>{name}</PName>
-				</Link>
-			</HeaderCard>
-			<main>
-				<ImgCard src={image} alt="Char Photo" />
-			</main>
+				</HeaderCard>
+				<main>
+					<ImgCard src={image} alt="Char Photo" />
+				</main>
+			</Link>
 			<footer>
-				<ButtonFav>🖤</ButtonFav>
+				{
+					isFav ? (
+						<ButtonFav onClick={() => { handleFavorite(isFav, id, name, image); }}>❤️</ButtonFav>		
+					) : (
+						<ButtonFav onClick={() => { handleFavorite(isFav, id, name, image); }}>🖤</ButtonFav>
+					)
+				}
 				<ButtonClose onClick={() => { closeCard(id); }}>❌</ButtonClose>
 			</footer>
 		</ArticleCard>
@@ -27,12 +44,11 @@ const Card = (props) => {
 };
 
 const ArticleCard = styled.article`
-	background: rgba(255, 255, 255, 0.7);
-	padding: 0 15px 15px 15px;
 	margin: 15px;
 	width: 205px;
 	border-radius: 5px;
-	/* justify-content: center; */
+	padding: 0 15px 15px 15px;
+	background: rgba(255, 255, 255, 0.7);
 
 	&:hover { background: white; };
 `;
@@ -49,10 +65,10 @@ const PName = styled.p`
 `;
 
 const ImgCard = styled.img`
-	border: 2px solid black;
 	width: 98%;
 	border-radius: 5px;
 	margin: 10px 0 10px 0;
+	border: 2px solid black;
 `;
 
 const Button = styled.button`
@@ -73,21 +89,6 @@ const ButtonFav = styled(Button)`
 
 const ButtonClose = styled(Button)`
 	border-radius: 0 5px 5px 0;
-`;
-
-const BtnCloseCard = styled.button`
-	/* float: right; */
-	border: 2px solid black;
-	color: black;
-	background-color: transparent;
-	font-weight: bold;
-	border-radius: 5px;
-
-	&:hover {
-		cursor: pointer;
-		background-color: red;
-		color: white;
-	}
 `;
 
 export default Card;
