@@ -1,8 +1,10 @@
 import Card from "./Card";
 import styled from "styled-components";
+// import { useSelector } from "react-redux"; // GET CHARACTERS WITH REDUX
 
 const Cards = (props) => {
    const { characters } = props;
+   // const characters = useSelector((state) => state.characters); // GET CHARACTERS WITH REDUX
 
    return (
       <SectionCards>{
@@ -22,6 +24,7 @@ const Cards = (props) => {
 const SectionCards = styled.section`
   display: flex; 
   justify-content: center;
+  /* overflow: visible; */
 `;
 
 export default Cards;

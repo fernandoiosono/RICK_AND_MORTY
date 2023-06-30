@@ -41,7 +41,7 @@ const Navigation = styled.nav`
     border-radius: 5px;
     display: flex;
     padding: 0 20px 0 20px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.7);
     align-items: center;
 `;
 

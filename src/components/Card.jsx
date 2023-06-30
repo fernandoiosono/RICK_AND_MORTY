@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { FnCloseCardContext } from "../js/contexts.js";
 import { Link } from "react-router-dom";
+import { FnCloseCardContext } from "../js/contexts.js";
+import { addFavorite, delFavorite } from "../redux/actions.js"
 
 const Card = (props) => {
 	const closeCard = useContext(FnCloseCardContext);
@@ -9,43 +10,73 @@ const Card = (props) => {
 
 	return (
 		<ArticleCard>
-			<header>
-				<Link to={`/carddetail/${id}`} 
-               style={{ textDecoration: "none", color: "purple" }}>
-					   <H2NameCard>{id + " - " + name}</H2NameCard>
+			<HeaderCard>
+				<Link to={`/carddetail/${id}`} style={{ textDecoration: "none", color: "purple" }}>
+					<PName>{name}</PName>
 				</Link>
-				<BtnCloseCard onClick={() => { closeCard(id); }}>X</BtnCloseCard>
-			</header>
+			</HeaderCard>
 			<main>
 				<ImgCard src={image} alt="Char Photo" />
 			</main>
+			<footer>
+				<ButtonFav>🖤</ButtonFav>
+				<ButtonClose onClick={() => { closeCard(id); }}>❌</ButtonClose>
+			</footer>
 		</ArticleCard>
 	);
 };
 
 const ArticleCard = styled.article`
 	background: rgba(255, 255, 255, 0.7);
-	padding: 15px;
+	padding: 0 15px 15px 15px;
 	margin: 15px;
 	width: 205px;
 	border-radius: 5px;
+	/* justify-content: center; */
 
-	&:hover {
-		background: rgba(255, 255, 255, 1);
-		width: 210px;
-	}
+	&:hover { background: white; };
 `;
 
-const H2NameCard = styled.h4`
-	float: left;
+const HeaderCard = styled.header`
+	height: 30px;
+	margin-bottom: 10px;
+`;
 
-	&:hover {
-		cursor: pointer;
-	}
+const PName = styled.p`
+	font-weight: bold;
+
+	&:hover { cursor: pointer; }
+`;
+
+const ImgCard = styled.img`
+	border: 2px solid black;
+	width: 98%;
+	border-radius: 5px;
+	margin: 10px 0 10px 0;
+`;
+
+const Button = styled.button`
+	width: 50%;
+	height: 30px;
+	color: black;
+	font-weight: bold;
+	border: 2px solid black;
+	background-color: white;
+
+	&:hover { cursor: pointer; }
+`;
+
+const ButtonFav = styled(Button)`
+	border-right: none;
+	border-radius: 5px 0 0 5px;
+`;
+
+const ButtonClose = styled(Button)`
+	border-radius: 0 5px 5px 0;
 `;
 
 const BtnCloseCard = styled.button`
-	float: right;
+	/* float: right; */
 	border: 2px solid black;
 	color: black;
 	background-color: transparent;
@@ -57,12 +88,6 @@ const BtnCloseCard = styled.button`
 		background-color: red;
 		color: white;
 	}
-`;
-
-const ImgCard = styled.img`
-	border: 2px solid black;
-	width: 98%;
-	border-radius: 5px;
 `;
 
 export default Card;

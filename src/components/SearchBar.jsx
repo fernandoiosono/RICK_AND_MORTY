@@ -14,8 +14,8 @@ const SearchBar = () => {
    const [ character, setCharacter ] = useState({
       idChar: 0,
       name: "",
-      species: "",
-      gender: "",
+      // species: "",
+      // gender: "",
       image: ""
    });
 
@@ -66,8 +66,8 @@ const SearchBar = () => {
                ...character,
                idChar: data.id,
                name: data.name,
-               species: data.species,
-               gender: data.gender,
+               // species: data.species,
+               // gender: data.gender,
                image: data.image
             })
          )
@@ -83,12 +83,10 @@ const SearchBar = () => {
       }
    }, [character]);
 
-   return (
-      <>
-         <InputID ref={inputSearch} type='search' onChange={guardarID} onKeyDown={handleKeyDown} />
-         <ButtonAdd onClick={searchChar}> Add Card </ButtonAdd>
-      </>
-   );
+   return (<>
+      <InputID ref={inputSearch} type='search' onChange={guardarID} onKeyDown={handleKeyDown} />
+      <ButtonAdd onClick={searchChar}>Add Card</ButtonAdd>
+   </>);
 };
 
 const InputID = styled.input`

@@ -52,7 +52,8 @@ const CardDetail = () => {
             <SectionImage>
                 <h1>{character.name}</h1>
                 <ImgChar src={character.image} alt="Character Image" />
-                <ButtonBack onClick={ () => {navigate("/home")} }>Volver</ButtonBack>
+                <br />
+                <ButtonBack onClick={ () => {navigate("/home")} }>Back</ButtonBack>
             </SectionImage>
             <SectionDetail>
                 <DivColumn>
@@ -113,6 +114,8 @@ const SectionImage = styled.section`
     padding: 20px;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.7);
+    justify-content: center;
+    overflow: visible;
 
     &:hover { background: rgba(255, 255, 255, 1); }
 `;
@@ -156,7 +159,7 @@ const ButtonBack = styled.button`
     border: 2px solid black;
     border-radius: 5px;
     height: 30px;
-    width: 100px;
+    width: 70px;
 
     &:hover {
         background-color: white;
