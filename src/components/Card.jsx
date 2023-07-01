@@ -1,23 +1,33 @@
-import { useContext } from "react";
+import { useContext, useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FnCloseCardContext } from "../js/contexts.js";
 import { addFavorite, delFavorite } from "../redux/actions.js"
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Card = (props) => {
 	const dispatch = useDispatch();
+	const buttonFav = useRef(null);
+	const { id, name, image } = props.args;
+	const [ isFav, setIsFav ] = useState(false);
 	const closeCard = useContext(FnCloseCardContext);
-	const { id, name, image, isFav } = props.args;
-
-	const handleFavorite = (isFavorite, id, name, image) => {
-		// console.log(isFavorite, id, name, image);
-		if (isFavorite) {
+	const favorites = useSelector((state) => state.favorites);
+	
+	const handleFavorite = () => {
+		if (isFav) {
 			dispatch(delFavorite(id));
+			setIsFav(false);
 		} else {
 			dispatch(addFavorite(id, name, image));
+			setIsFav(true);
 		}
 	};
+
+	useEffect(() => {
+		for (let f = 0; f < favorites.length; f++) {
+			if (favorites[f].id === id) setIsFav(true);
+		}
+	}, [favorites]);
 
 	return (
 		<ArticleCard>
@@ -32,9 +42,9 @@ const Card = (props) => {
 			<footer>
 				{
 					isFav ? (
-						<ButtonFav onClick={() => { handleFavorite(isFav, id, name, image); }}>❤️</ButtonFav>		
+						<ButtonFav ref={buttonFav} onClick={handleFavorite}>❤️</ButtonFav>		
 					) : (
-						<ButtonFav onClick={() => { handleFavorite(isFav, id, name, image); }}>🖤</ButtonFav>
+						<ButtonFav ref={buttonFav} onClick={handleFavorite}>🖤</ButtonFav>
 					)
 				}
 				<ButtonClose onClick={() => { closeCard(id); }}>❌</ButtonClose>

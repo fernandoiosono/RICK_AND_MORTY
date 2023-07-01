@@ -1,11 +1,3 @@
-export const getCharacters = {
-    type: "GET_CHARACTERS"
-};
-
-export const getFavorites = {
-    type: "GET_FAVORITES"
-};
-
 export const addCharacter = {
     type: "ADD_CHARACTER",
     payload: []

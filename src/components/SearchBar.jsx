@@ -64,8 +64,7 @@ const SearchBar = () => {
                ...character,
                idChar: data.id,
                name: data.name,
-               image: data.image,
-               isFav: false
+               image: data.image
             })
          )
          .catch((error) => console.log(error))

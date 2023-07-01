@@ -1,5 +1,5 @@
 import Nav from "./Nav.jsx";
-import Favs from "./Favs.jsx";
+import Favorites from "./Favorites.jsx";
 import Cards from "./Cards.jsx";
 import About from "./About.jsx";
 import Login from "./Login.jsx";
@@ -51,7 +51,7 @@ const App = () => {
               <Route path="*" element={<PageNotFound />} />
               <Route path="/" element={<Login />} />
               <Route path="/home" element={<Cards characters={characters} />} />
-              <Route path="/favs" element={<Favs characters={characters} />} />
+              <Route path="/favorites" element={<Favorites characters={characters} />} />
               <Route path="/about" element={<About />} />
               <Route path="/carddetail/:id" element={<CardDetail />} />
             </Routes>

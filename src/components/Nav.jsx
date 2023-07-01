@@ -19,8 +19,8 @@ const Nav = () => {
                 <Link to="/home" style={{ textDecoration: 'none', color: 'black' }}>
                     <H4Home>Home</H4Home>
                 </Link>
-                <Link to="/favs" style={{ textDecoration: 'none', color: 'black' }}>
-                    <H4About>Favorites</H4About>
+                <Link to="/favorites" style={{ textDecoration: 'none', color: 'black' }}>
+                    <H4About>❤️</H4About>
                 </Link>
                 <Link to="/about" style={{ textDecoration: 'none', color: 'black' }}>
                     <H4About>About</H4About>
