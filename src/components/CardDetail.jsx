@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const CardDetail = () => {
     const navigate = useNavigate();
-    const { id } = useParams();
+    const { fatherComp, id } = useParams();
     const jsonTemplate = "https://rickandmortyapi.com/api/character/";
 
     const [ idChar, setIdChar ] = useState(0);
@@ -53,7 +53,13 @@ const CardDetail = () => {
                 <h1>{character.name}</h1>
                 <ImgChar src={character.image} alt="Character Image" />
                 <br />
-                <ButtonBack onClick={ () => {navigate("/home")} }>Back</ButtonBack>
+                {
+                    fatherComp === "cards" ? (
+                        <ButtonBack onClick={ () => {navigate("/home")} }>Back</ButtonBack>
+                    ) : (
+                        <ButtonBack onClick={ () => {navigate("/favorites")} }>Back</ButtonBack>
+                    )
+                }
             </SectionImage>
             <SectionDetail>
                 <DivColumn>

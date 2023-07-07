@@ -30,7 +30,7 @@ const Card = (props) => {
 
 	return (
 		<ArticleCard>
-			<Link to={`/carddetail/${id}`} style={{ textDecoration: "none", color: "purple" }} title={id}>
+			<Link title={id} style={{ textDecoration: "none", color: "purple" }} to={`/carddetail/${fatherComp}/${id}`}>
 				<HeaderCard>
 					<PName>{name}</PName>
 				</HeaderCard>
