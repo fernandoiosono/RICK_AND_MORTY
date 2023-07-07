@@ -24,14 +24,14 @@ export const delFavorite = (id) => {
 
 export const filterCards = (gender) => {
     return {
-        type: "FILTER_CARDS",
+        type: "FILTER",
         payload: gender
     };
 };
 
 export const orderCards = (order) => {
     return { 
-        type: "ORDER_CARDS",
+        type: "ORDER",
         payload: order
     };
 };

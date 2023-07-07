@@ -12,7 +12,8 @@ const Cards = (props) => {
 					args={{
 						id: c.idChar,
 						name: c.name,
-						image: c.image
+						image: c.image,
+						fatherComp: "cards"
 					}}
 				/>
 			))}

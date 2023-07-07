@@ -19,13 +19,13 @@ const Nav = () => {
                 <Link to="/home" style={{ textDecoration: 'none', color: 'black' }}>
                     <H4Home>Home</H4Home>
                 </Link>
-                <Link to="/favorites" style={{ textDecoration: 'none', color: 'black' }}>
+                <Link to="/favorites" style={{ textDecoration: 'none' }}>
                     <H4About>❤️</H4About>
                 </Link>
                 <Link to="/about" style={{ textDecoration: 'none', color: 'black' }}>
                     <H4About>About</H4About>
                 </Link>
-                <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
+                <Link to="/" style={{ textDecoration: 'none' }}>
                     <H4LogOut onClick={handleLogOut}>💣</H4LogOut>
                 </Link>
             </ArticleLinks>

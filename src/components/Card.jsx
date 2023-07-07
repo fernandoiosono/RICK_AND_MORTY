@@ -1,4 +1,4 @@
-import { useContext, useRef, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FnCloseCardContext } from "../js/contexts.js";
@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Card = (props) => {
 	const dispatch = useDispatch();
-	// const buttonFav = useRef(null);
 	const { id, name, image, fatherComp } = props.args;
 	const [ isFav, setIsFav ] = useState(false);
 	const closeCard = useContext(FnCloseCardContext);
@@ -40,14 +39,13 @@ const Card = (props) => {
 				</main>
 			</Link>
 			<footer>
-				{/* <ButtonFavMate ref={buttonFav} onClick={handleFavorite}>{ isFav ? "❤️" : "🖤" }</ButtonFavMate> */}
 				{
-					(fatherComp === "cards") ? (
+					fatherComp === "cards" ? (
 						<>
 							<ButtonFavMate onClick={handleFavorite}>{ isFav ? "❤️" : "🖤" }</ButtonFavMate>
 							<ButtonClose onClick={() => { closeCard(id); }}>❌</ButtonClose>	
 						</>
-					) : (
+					) : ( // fatherComp === "favorites"
 						<ButtonFavAlone onClick={handleFavorite}>{ isFav ? "❤️" : "🖤" }</ButtonFavAlone>
 					)
 				}
