@@ -26,7 +26,7 @@ const Nav = () => {
                     <H4About>About</H4About>
                 </Link>
                 <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
-                    <H4LogOut onClick={handleLogOut}>LogOut</H4LogOut>
+                    <H4LogOut onClick={handleLogOut}>💣</H4LogOut>
                 </Link>
             </ArticleLinks>
             <ArticleSearch>

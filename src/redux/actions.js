@@ -21,3 +21,17 @@ export const delFavorite = (id) => {
         payload: id
     };
 };
+
+export const filterCards = (gender) => {
+    return {
+        type: "FILTER_CARDS",
+        payload: gender
+    };
+};
+
+export const orderCards = (order) => {
+    return { 
+        type: "ORDER_CARDS",
+        payload: order
+    };
+};

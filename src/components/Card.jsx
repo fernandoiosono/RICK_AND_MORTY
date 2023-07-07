@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Card = (props) => {
 	const dispatch = useDispatch();
-	const buttonFav = useRef(null);
-	const { id, name, image } = props.args;
+	// const buttonFav = useRef(null);
+	const { id, name, image, fatherComp } = props.args;
 	const [ isFav, setIsFav ] = useState(false);
 	const closeCard = useContext(FnCloseCardContext);
 	const favorites = useSelector((state) => state.favorites);
@@ -40,14 +40,17 @@ const Card = (props) => {
 				</main>
 			</Link>
 			<footer>
+				{/* <ButtonFavMate ref={buttonFav} onClick={handleFavorite}>{ isFav ? "❤️" : "🖤" }</ButtonFavMate> */}
 				{
-					isFav ? (
-						<ButtonFav ref={buttonFav} onClick={handleFavorite}>❤️</ButtonFav>		
+					(fatherComp === "cards") ? (
+						<>
+							<ButtonFavMate onClick={handleFavorite}>{ isFav ? "❤️" : "🖤" }</ButtonFavMate>
+							<ButtonClose onClick={() => { closeCard(id); }}>❌</ButtonClose>	
+						</>
 					) : (
-						<ButtonFav ref={buttonFav} onClick={handleFavorite}>🖤</ButtonFav>
+						<ButtonFavAlone onClick={handleFavorite}>{ isFav ? "❤️" : "🖤" }</ButtonFavAlone>
 					)
 				}
-				<ButtonClose onClick={() => { closeCard(id); }}>❌</ButtonClose>
 			</footer>
 		</ArticleCard>
 	);
@@ -82,7 +85,6 @@ const ImgCard = styled.img`
 `;
 
 const Button = styled.button`
-	width: 50%;
 	height: 30px;
 	color: black;
 	font-weight: bold;
@@ -92,12 +94,20 @@ const Button = styled.button`
 	&:hover { cursor: pointer; }
 `;
 
-const ButtonFav = styled(Button)`
+const ButtonFavAlone = styled(Button)`
+	width: 100%;
+	/* border-right: none; */
+	border-radius: 5px;
+`;
+
+const ButtonFavMate = styled(Button)`
+	width: 50%;
 	border-right: none;
 	border-radius: 5px 0 0 5px;
 `;
 
 const ButtonClose = styled(Button)`
+	width: 50%;
 	border-radius: 0 5px 5px 0;
 `;
 

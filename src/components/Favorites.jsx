@@ -7,13 +7,14 @@ const Favorites = () => {
 
     return (
         <SectionFavs>
-            {favorites.map((c) => (
+            {favorites.map((f) => (
 				<Card
-					key={c.id}
+					key={f.id}
 					args={{
-						id: c.id,
-						name: c.name,
-						image: c.image
+						id: f.id,
+						name: f.name,
+						image: f.image,
+						component: "favs"
 					}}
 				/>
 			))}
