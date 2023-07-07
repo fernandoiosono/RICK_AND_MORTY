@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Card = (props) => {
 	const dispatch = useDispatch();
-	const { id, name, image, fatherComp } = props.args;
+	const { id, name, image, gender, fatherComp } = props.args;
 	const [ isFav, setIsFav ] = useState(false);
 	const closeCard = useContext(FnCloseCardContext);
 	const favorites = useSelector((state) => state.favorites);
@@ -17,7 +17,7 @@ const Card = (props) => {
 			dispatch(delFavorite(id));
 			setIsFav(false);
 		} else {
-			dispatch(addFavorite(id, name, image));
+			dispatch(addFavorite(id, name, image, gender));
 			setIsFav(true);
 		}
 	};

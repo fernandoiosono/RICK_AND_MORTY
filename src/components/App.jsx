@@ -26,6 +26,7 @@ const App = () => {
   };
 
   const addNewCharacter = (char) => {
+    console.log(char);
     setCharacters([...characters, char]);
   };
 

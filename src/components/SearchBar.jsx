@@ -14,7 +14,8 @@ const SearchBar = () => {
    const [ character, setCharacter ] = useState({
       idChar: 0,
       name: "",
-      image: ""
+      image: "",
+      gender: ""
    });
 
    const handleKeyDown = (event) => { if (event.key === "Enter") searchChar(); }
@@ -64,7 +65,8 @@ const SearchBar = () => {
                ...character,
                idChar: data.id,
                name: data.name,
-               image: data.image
+               image: data.image,
+               gender: data.gender
             })
          )
          .catch((error) => console.log(error))

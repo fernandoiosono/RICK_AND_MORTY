@@ -3,10 +3,10 @@ export const addCharacter = {
     payload: []
 };
 
-export const addFavorite = (id, name, image) => {
+export const addFavorite = (id, name, image, gender) => {
     return { 
         type: "ADD_FAVORITE", 
-        payload: { id: id, name: name, image: image } 
+        payload: { id: id, name: name, image: image, gender: gender } 
     };
 };
 

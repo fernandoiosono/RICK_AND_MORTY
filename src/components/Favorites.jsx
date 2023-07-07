@@ -12,8 +12,7 @@ const Favorites = () => {
 	};
 
 	const handleFilter = (e) => {
-		// dispatch(filterCards(e.target.value));
-		console.log(e.target.value);
+		dispatch(filterCards(e.target.value));
 	};
 
     return (<>
@@ -39,6 +38,7 @@ const Favorites = () => {
 						id: f.id,
 						name: f.name,
 						image: f.image,
+						gender: f.gender,
 						fatherComp: "favorites"
 					}}
 				/>
