@@ -9,62 +9,63 @@ import PageNotFound from "./PageNotFound.jsx";
 import { useState } from "react";
 import styled from "styled-components";
 import { Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { AuthenticationContext, 
-  CharactersContext, 
-  FnAddNewCharContext, 
+  // CharactersContext, 
+  // FnAddNewCharContext, 
   FnCloseCardContext } from "../js/contexts.js";
 
 const App = () => {
-  const [ userIsAuth, setUserIsAuth ] = useState(false);
-  const [ characters, setCharacters ] = useState([]);
-  
-  const handleLogin = (isAuth) => {
-    if (!isAuth) setCharacters([]);
-    
-    setUserIsAuth(isAuth);
-  };
+  const [characters, setCharacters] = useState([]);
+  const allCharacters = useSelector((state) => state.allCharacters);
 
-  const addNewCharacter = (char) => {
-    setCharacters([...characters, char]);
-  };
+	const [userIsAuth, setUserIsAuth] = useState(false);
 
-  const closeCharCard = (idChar) => {
-    setCharacters((current) =>
-      current.filter((char) => char.idChar !== idChar)
-    )
-  };
+	const handleLogin = (isAuth) => {
+		if (!isAuth) setCharacters([]);
 
-  return (
-    <AuthenticationContext.Provider value={handleLogin}>
-      <SectionApp>
-        <header>
-          <CharactersContext.Provider value={characters}>
-            <FnAddNewCharContext.Provider value={addNewCharacter}>
+		setUserIsAuth(isAuth);
+	};
+
+	const addNewCharacter = (char) => {
+		setCharacters([...characters, char]);
+	};
+
+	const closeCharCard = (idChar) => {
+		setCharacters((current) => current.filter((char) => char.idChar !== idChar));
+	};
+
+	return (
+		<AuthenticationContext.Provider value={handleLogin}>
+			<SectionApp>
+				<header>
+					{/* <CharactersContext.Provider value={characters}> */}
+						{/* <FnAddNewCharContext.Provider value={addNewCharacter}> */}
               {userIsAuth ? <Nav /> : null}
-            </FnAddNewCharContext.Provider>
-          </CharactersContext.Provider>
-        </header>
-        <main>
-          <FnCloseCardContext.Provider value={closeCharCard}>
-            <Routes>
-              <Route path="*" element={<PageNotFound />} />
-              <Route path="/" element={<Login />} />
-              <Route path="/home" element={<Cards characters={characters} />} />
-              <Route path="/favorites" element={<Favorites />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/carddetail/:fatherComp/:id" element={<CardDetail />} />
-            </Routes>
-          </FnCloseCardContext.Provider>
-        </main>
-      </SectionApp>
-    </AuthenticationContext.Provider>
-  );
+            {/* </FnAddNewCharContext.Provider> */}
+					{/* </CharactersContext.Provider> */}
+				</header>
+				<main>
+					<FnCloseCardContext.Provider value={closeCharCard}>
+						<Routes>
+							<Route path="*" element={<PageNotFound />} />
+							<Route path="/" element={<Login />} />
+							<Route path="/home" element={<Cards characters={characters} />} />
+							<Route path="/favorites" element={<Favorites />} />
+							<Route path="/about" element={<About />} />
+							<Route path="/carddetail/:fatherComp/:id" element={<CardDetail />} />
+						</Routes>
+					</FnCloseCardContext.Provider>
+				</main>
+			</SectionApp>
+		</AuthenticationContext.Provider>
+	);
 };
 
 const SectionApp = styled.section`
-  text-align: center;
-  padding: 25px;
+	text-align: center;
+	padding: 25px;
 `;
 
 export default App;

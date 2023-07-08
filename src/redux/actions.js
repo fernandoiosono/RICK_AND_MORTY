@@ -1,3 +1,19 @@
+export const addCharacter = (id) => {
+    const jsonTemplate = "https://rickandmortyapi.com/api/character/";
+
+    return function (dispatch) {
+        fetch(jsonTemplate + id)
+         .then((response) => response.json())
+         .then((data) => 
+            dispatch({
+                type: "ADD_CHARACTER",
+                payload: { id: data.id, name: data.name, image: data.image, gender: data.gender }
+            })
+        )
+        // .catch((error) => console.log(error))
+    };
+};
+
 export const addFavorite = (id, name, image, gender) => {
     return { 
         type: "ADD_FAVORITE", 

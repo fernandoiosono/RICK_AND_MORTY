@@ -1,119 +1,85 @@
 import styled from "styled-components";
-import { useEffect, useState, useRef, useContext } from "react";
-import { CharactersContext, FnAddNewCharContext } from "../js/contexts.js";
+import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addCharacter } from "../redux/actions.js";
 
 const SearchBar = () => {
-   let inputVal = "";
+	let inputVal = "";
 
-   const inputSearch = useRef(null);
-   const characters = useContext(CharactersContext);
-   const addNewChar = useContext(FnAddNewCharContext);
-   const jsonTemplate = "https://rickandmortyapi.com/api/character/";
-   
-   const [ idChar, setIdChar ] = useState(0);
-   const [ character, setCharacter ] = useState({
-      idChar: 0,
-      name: "",
-      image: "",
-      gender: ""
-   });
+	const dispatch = useDispatch();
+	const allCharacters = useSelector((state) => state.allCharacters);
+	const inputSearch = useRef(null);
 
-   const handleKeyDown = (event) => { if (event.key === "Enter") searchChar(); }
+	const cleanInput = () => {
+		inputSearch.current.value = "";
+		inputSearch.current.focus();
+	};
 
-   const cleanInput = () => {
-      inputSearch.current.value = "";
-      inputSearch.current.focus();
-   };
+	const handleChangeID = (e) => {
+		inputVal = e.target.value;
+	};
 
-   const guardarID = (event) => {
-      inputVal = event.target.value;
-   };
+	const handleAddChar = () => {
+		if (validateChar()) dispatch(addCharacter(inputVal));
+        
+		cleanInput();
+	};
 
-   const searchChar = () => {
-      if (validateChar()) setIdChar(inputVal);
-      else cleanInput();
-   };
+	const handleKeyDown = (e) => {
+		if (e.key === "Enter") handleAddChar();
+	};
 
-   const validateChar = () => {
-      let order = "Ingresa un número del 1 al 826.";
-   
-      switch (true) {
-         case (isNaN(inputVal)):
-            alert(`Este campo sólo acepta números por el momento. \n ${order}`);
-            return false;
+	const validateChar = () => {
+		let order = "Ingresa un número del 1 al 826.";
 
-         case (inputVal < 1 || inputVal > 826):
-            alert(`${order}`);
-            return false;
+		switch (true) {
+			case isNaN(inputVal):
+				alert(`Este campo sólo acepta números por el momento. \n ${order}`);
+				return false;
 
-         case (characters.filter(char => char.idChar == inputVal).length > 0):
-            alert("El personaje seleccionado ya existe, selecciona otro.");
-            return false;
-      }
-   
-      return true;
-   };
+			case inputVal < 1 || inputVal > 826:
+				alert(`${order}`);
+				return false;
 
-   useEffect(() => { cleanInput() }, []); // componentDidMount => Focus en el Input
-   
-   useEffect(() => {
-      if (idChar !== 0) { // Evito que se ejecute cuando se monta
-         fetch(jsonTemplate + idChar)
-         .then((response) => response.json())
-         .then((data) =>
-            setCharacter({
-               ...character,
-               idChar: data.id,
-               name: data.name,
-               image: data.image,
-               gender: data.gender
-            })
-         )
-         .catch((error) => console.log(error))
-      }
-   }, [idChar]);
+			case allCharacters.filter((char) => char.id == inputVal).length > 0:
+				alert("El personaje seleccionado ya existe, selecciona otro.");
+				return false;
+		}
 
-   useEffect(() => {
-      if (character.idChar !== 0 && character.idChar !== undefined) {
-         addNewChar(character);
+		return true;
+	};
 
-         cleanInput();
-      }
-   }, [character]);
-
-   return (<>
-      <InputID ref={inputSearch} type='search' onChange={guardarID} onKeyDown={handleKeyDown} />
-      <ButtonAdd onClick={searchChar}>Add Card</ButtonAdd>
-   </>);
+	return (<>
+        <InputID ref={inputSearch} type="search" onChange={handleChangeID} onKeyDown={handleKeyDown} autoFocus />
+        <ButtonAdd onClick={handleAddChar}>Add Card</ButtonAdd>
+    </>);
 };
 
 const InputID = styled.input`
-   height: 30px;
-   border: 2px solid black;
-   border-radius: 5px 0 0 5px;
-   text-align: center;
-   background: rgba(255, 255, 255, 0.5);
+	height: 30px;
+	border: 2px solid black;
+	border-radius: 5px 0 0 5px;
+	text-align: center;
+	background: rgba(255, 255, 255, 0.5);
 
-   &:hover {
-      background: rgba(255, 255, 255, 1);
-   }
+	&:hover { background: rgba(255, 255, 255, 1); }
 `;
 
 const ButtonAdd = styled.button`
-   height: 30px;
-   width: 100px;
-   border: 2px solid black;
-   border-radius: 0 5px 5px 0;
-   border-left: none;
-   background-color: black;
-   color: white;
-   font-weight: bold;
+	height: 30px;
+	width: 100px;
+	border: 2px solid black;
+	border-radius: 0 5px 5px 0;
+	border-left: none;
+	background-color: black;
+	color: white;
+	font-weight: bold;
 
-   &:hover {
-      cursor: pointer;
-      background-color: rgb(46, 204, 113);
-      color: black;
-   }
+	&:hover {
+		cursor: pointer;
+		background-color: rgb(46, 204, 113);
+		color: black;
+	}
 `;
 
 export default SearchBar;

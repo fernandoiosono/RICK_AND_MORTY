@@ -6,6 +6,9 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case "ADD_CHARACTER":
+			return { ...state,
+				allCharacters: [...state.allCharacters, action.payload ] };
 		case "ADD_FAVORITE":
 			return { ...state, 
 				allFavorites: [ ...state.allFavorites, action.payload ],

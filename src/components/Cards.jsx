@@ -1,20 +1,21 @@
-import Card from "./Card";
+import Card from "./Card.jsx";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
-const Cards = (props) => {
-	const { characters } = props;
+const Cards = () => {
+	const allCharacters = useSelector((state) => state.allCharacters);
 
 	return (
 		<SectionCards>
-			{characters.map((c) => (
+			{allCharacters.map((c) => (
 				<Card
-					key={c.idChar}
+					key={c.id}
 					args={{
-						id: c.idChar,
+						id: c.id,
 						name: c.name,
 						image: c.image,
 						gender: c.gender,
-						fatherComp: "cards"
+						fatherComp: "cards",
 					}}
 				/>
 			))}
