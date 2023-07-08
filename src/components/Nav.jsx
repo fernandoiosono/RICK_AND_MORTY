@@ -11,7 +11,8 @@ const Nav = () => {
     const fnHandleLogin = useContext(AuthenticationContext);
 
     const handleFavorites = () => {
-        dispatch(resetFilterFavorites());
+        // Reseteamos los filtros para que aparezcan todos los favoritos de nuevo cada que se abra el componente
+        dispatch(resetFilterFavorites()); 
     };
 
     const handleLogOut = () => {

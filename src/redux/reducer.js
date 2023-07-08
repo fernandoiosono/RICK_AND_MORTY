@@ -16,12 +16,13 @@ const rootReducer = (state = initialState, action) => {
 				favorites: state.favorites.filter((char) => char.id !== action.payload) };
 		case "FILTER_FAVORITES":
 			return { ...state,
-				favorites: state.allFavorites.filter((char) => char.gender === action.payload) };
+				favorites: (action.payload) ? [...state.allFavorites].filter((char) => char.gender === action.payload)
+					: [...state.allFavorites] };
 		case "ORDER_FAVORITES":
 			return {...state,
-				favorites: (action.payload === "Ascending") 
-					? [...state.allFavorites].sort((a, b) => a.id - b.id) 
-					: [...state.allFavorites].sort((a, b) => a.id + b.id) };
+				favorites: (action.payload === "Ascending") ? [...state.favorites].sort((a, b) => a.id - b.id) 
+					: ((action.payload === "Descending") ? [...state.favorites].sort((a, b) => a.id - b.id).reverse()
+						: [...state.favorites]) };
 		case "RESET_FILTER_FAVORITES":
 			return {...state,
 				favorites: state.allFavorites

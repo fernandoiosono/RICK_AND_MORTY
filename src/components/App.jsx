@@ -51,7 +51,7 @@ const App = () => {
               <Route path="*" element={<PageNotFound />} />
               <Route path="/" element={<Login />} />
               <Route path="/home" element={<Cards characters={characters} />} />
-              <Route path="/favorites" element={<Favorites characters={characters} />} />
+              <Route path="/favorites" element={<Favorites />} />
               <Route path="/about" element={<About />} />
               <Route path="/carddetail/:fatherComp/:id" element={<CardDetail />} />
             </Routes>

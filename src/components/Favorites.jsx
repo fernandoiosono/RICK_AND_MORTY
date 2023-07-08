@@ -12,23 +12,26 @@ const Favorites = () => {
 	};
 
 	const handleFilter = (e) => {
+		// Deseleccionamos el orden para evitar tener que codificar más condicionales
+		document.getElementById("slctOrder").selectedIndex = 0; 
+		
 		dispatch(filterFavorites(e.target.value));
 	};
 
     return (<>
 		<SectionFilters>
-			<SlctOrder name="slctOrder" id="slctOrder" onChange={handleOrder}>
-				<option value></option>
-				<option value="Ascending">Ascending</option>
-				<option value="Descending">Descending</option>
-			</SlctOrder>
 			<SlctGender name="slctFilter" id="slctFilter" onChange={handleFilter}>
-				<option value></option>
+				<option value="" style={{ color: 'grey' }}>Filtrar por...</option>
 				<option value="Male">Male</option>
 				<option value="Female">Female</option>
 				<option value="Genderless">Genderless</option>
 				<option value="Unknown">Unknown</option>
 			</SlctGender>
+			<SlctOrder name="slctOrder" id="slctOrder" onChange={handleOrder}>
+				<option value="" style={{ color: 'grey' }}>Ordenar...</option>
+				<option value="Ascending">Ascending</option>
+				<option value="Descending">Descending</option>
+			</SlctOrder>
 		</SectionFilters>
         <SectionFavs>
             {favorites.map((f) => (
@@ -66,11 +69,11 @@ const Select = styled.select`
 `;
 
 const SlctOrder = styled(Select)`
-	margin-right: 10px;
+	
 `;
 
 const SlctGender = styled(Select)`
-	
+	margin-right: 10px;
 `;
 
 export default Favorites;
