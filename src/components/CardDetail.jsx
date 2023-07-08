@@ -1,51 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { setCharacterDetail, cleanDetail } from "../redux/actions";
 
 const CardDetail = () => {
+    const dispatch = useDispatch();
+    const character = useSelector((state) => state.characterDetail)
     const navigate = useNavigate();
     const { fatherComp, id } = useParams();
-    const jsonTemplate = "https://rickandmortyapi.com/api/character/";
-
-    const [ idChar, setIdChar ] = useState(0);
-    const [ character, setCharacter ] = useState({
-        name: "",
-        status: "",
-        species: "",
-        type: "",
-        gender: "",
-        origin: "",
-        location: "",
-        image: "",
-        created: ""
-    });
 
     useEffect(() => {
-        setIdChar(id);
-    }, []);
+        dispatch(setCharacterDetail(id));
 
-    useEffect(() => {
-        if (idChar !== 0) {
-            fetch(jsonTemplate + idChar)
-            .then((response) => response.json())
-            .then((data) =>
-                setCharacter({
-                    ...character,
-                    name: data.name,
-                    status: ((!data.status || data.status === "unknown") ? "Unknown" : data.status),
-                    species: ((!data.species || data.species === "unknown") ? "Unknown" : data.species),
-                    type: ((!data.type || data.type === "unknown") ? "Unknown" : data.type),
-                    gender: ((!data.gender || data.gender === "unknown") ? "Unknown" : data.gender),
-                    origin: ((!data.origin.name || data.origin.name === "unknown") ? "Unknown" : data.origin.name),
-                    location: ((!data.location.name || data.location.name === "unknown") ? "Unknown" : data.location.name),
-                    image: data.image,
-                    created: ((!data.created || data.created === "unknown") ? "Unknown" : data.created)
-                })
-            )
-            .catch((error) => console.log(error));
-        }
-        return () => setCharacter({});
-    }, [idChar]);
+        return () => { dispatch(cleanDetail()); };
+    }, [id]);
 
     return (
         <DivRow>

@@ -1,15 +1,13 @@
-import { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { FnCloseCardContext } from "../js/contexts.js";
-import { addFavorite, delFavorite } from "../redux/actions.js"
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { delCharacter, addFavorite, delFavorite } from "../redux/actions.js"
 
 const Card = (props) => {
 	const dispatch = useDispatch();
-	const { id, name, image, gender, fatherComp } = props.args;
 	const [ isFav, setIsFav ] = useState(false);
-	const closeCard = useContext(FnCloseCardContext);
+	const { id, name, image, gender, fatherComp } = props.args;
 	const allFavorites = useSelector((state) => state.allFavorites);
 	
 	const handleFavorite = () => {
@@ -20,6 +18,10 @@ const Card = (props) => {
 			dispatch(addFavorite(id, name, image, gender));
 			setIsFav(true);
 		}
+	};
+
+	const handleDelCharacter = () => {
+		dispatch(delCharacter(id));
 	};
 
 	useEffect(() => {
@@ -43,7 +45,7 @@ const Card = (props) => {
 					fatherComp === "cards" ? (
 						<>
 							<ButtonFavMate onClick={handleFavorite}>{ isFav ? "❤️" : "🖤" }</ButtonFavMate>
-							<ButtonClose onClick={() => { closeCard(id); }}>❌</ButtonClose>	
+							<ButtonClose onClick={handleDelCharacter}>❌</ButtonClose>	
 						</>
 					) : ( // fatherComp === "favorites"
 						<ButtonFavAlone onClick={handleFavorite}>{ isFav ? "❤️" : "🖤" }</ButtonFavAlone>

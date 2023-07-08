@@ -1,51 +1,98 @@
+import * as actionType from "./actionTypes.js";
+
+const urlInfoChar = "https://rickandmortyapi.com/api/character/";
+
+const formatUnknown = (param) => {
+    return (!param || param === "unknown") ? "Unknown" : param;
+};
+
+export const userAuthentication = (isAuth) => {
+	return {
+		type: actionType.USER_AUTHENTICATION,
+		payload: isAuth
+	};
+};
+
 export const addCharacter = (id) => {
-    const jsonTemplate = "https://rickandmortyapi.com/api/character/";
+	return function (dispatch) {
+		fetch(urlInfoChar + id)
+			.then((response) => response.json())
+			.then((data) =>
+				dispatch({
+					type: actionType.ADD_CHARACTER,
+					payload: { id: data.id, name: data.name, image: data.image, gender: data.gender }
+				})
+			);
+	};
+};
 
+export const setCharacterDetail = (id) => {
     return function (dispatch) {
-        fetch(jsonTemplate + id)
-         .then((response) => response.json())
-         .then((data) => 
-            dispatch({
-                type: "ADD_CHARACTER",
-                payload: { id: data.id, name: data.name, image: data.image, gender: data.gender }
-            })
-        )
-        // .catch((error) => console.log(error))
+        fetch(urlInfoChar + id)
+            .then((response) => response.json())
+            .then((data) =>
+                dispatch({
+                    type: actionType.SET_CHARACTER_DETAIL,
+                    payload: {
+                        id: id,
+                        name: data.name,
+                        status: formatUnknown(data.status),
+                        species: formatUnknown(data.species),
+                        type: formatUnknown(data.type),
+                        gender: formatUnknown(data.gender),
+                        origin: formatUnknown(data.origin.name),
+                        location: formatUnknown(data.location.name),
+                        image: data.image,
+                        created: formatUnknown(data.created)
+                    }
+                })
+            );
     };
 };
 
-export const addFavorite = (id, name, image, gender) => {
-    return { 
-        type: "ADD_FAVORITE", 
-        payload: { id: id, name: name, image: image, gender: gender } 
-    };
-};
-
-export const delFavorite = (id) => {
+export const delCharacter = (id) => {
     return {
-        type: "DEL_FAVORITE",
+        type: actionType.DEL_CHARACTER,
         payload: id
     };
 };
 
+export const addFavorite = (id, name, image, gender) => {
+	return {
+		type: actionType.ADD_FAVORITE,
+		payload: { id: id, name: name, image: image, gender: gender }
+	};
+};
+
+export const delFavorite = (id) => {
+	return {
+		type: actionType.DEL_FAVORITE,
+		payload: id
+	};
+};
+
 export const filterFavorites = (gender) => {
-    return {
-        type: "FILTER_FAVORITES",
-        payload: gender
-    };
+	return {
+		type: actionType.FILTER_FAVORITES,
+		payload: gender
+	};
 };
 
 export const orderFavorites = (order) => {
-    return { 
-        type: "ORDER_FAVORITES",
-        payload: order
-    };
+	return {
+		type: actionType.ORDER_FAVORITES,
+		payload: order
+	};
 };
 
-export const resetFilterFavorites = () => {
-    return { type: "RESET_FILTER_FAVORITES" }
+export const cleanFilterFavorites = () => {
+	return { type: actionType.CLEAN_FILTER_FAVORITES };
+};
+
+export const cleanDetail = () => {
+    return { type: actionType.CLEAN_DETAIL }
 };
 
 export const cleanState = () => {
-    return { type: "CLEAN_STATE" };
+	return { type: actionType.CLEAN_STATE };
 };

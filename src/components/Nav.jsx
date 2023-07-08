@@ -1,23 +1,19 @@
 import styled from "styled-components";
 import SearchBar from "./SearchBar.jsx";
 import { Link } from "react-router-dom";
-import { AuthenticationContext } from "../js/contexts.js"
-import { useContext } from "react";
 import { useDispatch } from "react-redux";
-import { resetFilterFavorites, cleanState } from "../redux/actions.js";
+import { cleanFilterFavorites, cleanState } from "../redux/actions.js";
 
 const Nav = () => {
     const dispatch = useDispatch();
-    const fnHandleLogin = useContext(AuthenticationContext);
 
     const handleFavorites = () => {
         // Reseteamos los filtros para que aparezcan todos los favoritos de nuevo cada que se abra el componente
-        dispatch(resetFilterFavorites()); 
+        dispatch(cleanFilterFavorites()); 
     };
 
     const handleLogOut = () => {
         dispatch(cleanState());
-        fnHandleLogin(false);
     };
 
     return (<>
