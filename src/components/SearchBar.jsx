@@ -1,18 +1,17 @@
 import styled from "styled-components";
-import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCharacter } from "../redux/actions.js";
 
 const SearchBar = () => {
 	let inputVal = "";
-
+    
 	const dispatch = useDispatch();
 	const allCharacters = useSelector((state) => state.allCharacters);
-	const inputSearch = useRef(null);
+    const inputID = document.getElementById("inputID");
 
 	const cleanInput = () => {
-		inputSearch.current.value = "";
-		inputSearch.current.focus();
+        inputID.value = "";
+		inputID.focus();
 	};
 
 	const handleChangeID = (e) => {
@@ -21,8 +20,8 @@ const SearchBar = () => {
 
 	const handleAddChar = () => {
 		if (validateChar()) dispatch(addCharacter(inputVal));
-        
-		cleanInput();
+
+		cleanInput(); // Clean de input no matter what happens before
 	};
 
 	const handleKeyDown = (e) => {
@@ -50,7 +49,7 @@ const SearchBar = () => {
 	};
 
 	return (<>
-        <InputID ref={inputSearch} type="search" onChange={handleChangeID} onKeyDown={handleKeyDown} autoFocus />
+        <InputID id="inputID" type="search" onChange={handleChangeID} onKeyDown={handleKeyDown} autoFocus />
         <ButtonAdd onClick={handleAddChar}>Add Card</ButtonAdd>
     </>);
 };

@@ -9,27 +9,16 @@ import PageNotFound from "./PageNotFound.jsx";
 import { useState } from "react";
 import styled from "styled-components";
 import { Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
 
-import { AuthenticationContext, 
-  // CharactersContext, 
-  // FnAddNewCharContext, 
-  FnCloseCardContext } from "../js/contexts.js";
+import { AuthenticationContext, FnCloseCardContext } from "../js/contexts.js";
 
 const App = () => {
-  const [characters, setCharacters] = useState([]);
-  const allCharacters = useSelector((state) => state.allCharacters);
-
 	const [userIsAuth, setUserIsAuth] = useState(false);
 
 	const handleLogin = (isAuth) => {
 		if (!isAuth) setCharacters([]);
 
 		setUserIsAuth(isAuth);
-	};
-
-	const addNewCharacter = (char) => {
-		setCharacters([...characters, char]);
 	};
 
 	const closeCharCard = (idChar) => {
@@ -39,19 +28,13 @@ const App = () => {
 	return (
 		<AuthenticationContext.Provider value={handleLogin}>
 			<SectionApp>
-				<header>
-					{/* <CharactersContext.Provider value={characters}> */}
-						{/* <FnAddNewCharContext.Provider value={addNewCharacter}> */}
-              {userIsAuth ? <Nav /> : null}
-            {/* </FnAddNewCharContext.Provider> */}
-					{/* </CharactersContext.Provider> */}
-				</header>
+				<header>{userIsAuth ? <Nav /> : null}</header>
 				<main>
 					<FnCloseCardContext.Provider value={closeCharCard}>
 						<Routes>
 							<Route path="*" element={<PageNotFound />} />
 							<Route path="/" element={<Login />} />
-							<Route path="/home" element={<Cards characters={characters} />} />
+							<Route path="/home" element={<Cards />} />
 							<Route path="/favorites" element={<Favorites />} />
 							<Route path="/about" element={<About />} />
 							<Route path="/carddetail/:fatherComp/:id" element={<CardDetail />} />
