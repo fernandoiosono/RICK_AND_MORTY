@@ -1,16 +1,22 @@
 import styled from "styled-components";
 import SearchBar from "./SearchBar.jsx";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthenticationContext } from "../js/contexts.js"
 import { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { resetFilterFavorites, cleanState } from "../redux/actions.js";
 
 const Nav = () => {
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const fnHandleLogin = useContext(AuthenticationContext);
 
+    const handleFavorites = () => {
+        dispatch(resetFilterFavorites());
+    };
+
     const handleLogOut = () => {
+        dispatch(cleanState());
         fnHandleLogin(false);
-        navigate("/");
     };
 
     return (<>
@@ -20,7 +26,7 @@ const Nav = () => {
                     <H4Home>Home</H4Home>
                 </Link>
                 <Link to="/favorites" style={{ textDecoration: 'none' }}>
-                    <H4About>❤️</H4About>
+                    <H4About onClick={handleFavorites}>❤️</H4About>
                 </Link>
                 <Link to="/about" style={{ textDecoration: 'none', color: 'black' }}>
                     <H4About>About</H4About>

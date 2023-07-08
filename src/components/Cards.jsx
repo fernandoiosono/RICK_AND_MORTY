@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const Cards = (props) => {
 	const { characters } = props;
-	console.log(characters);
 
 	return (
 		<SectionCards>

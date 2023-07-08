@@ -1,18 +1,18 @@
 import Card from "./Card.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { filterCards, orderCards } from "../redux/actions.js"
+import { filterFavorites, orderFavorites } from "../redux/actions.js"
 
 const Favorites = () => {
     const favorites = useSelector((state) => state.favorites);
 	const dispatch = useDispatch();
 
 	const handleOrder = (e) => {
-		dispatch(orderCards(e.target.value));
+		dispatch(orderFavorites(e.target.value));
 	};
 
 	const handleFilter = (e) => {
-		dispatch(filterCards(e.target.value));
+		dispatch(filterFavorites(e.target.value));
 	};
 
     return (<>

@@ -10,7 +10,7 @@ const Card = (props) => {
 	const { id, name, image, gender, fatherComp } = props.args;
 	const [ isFav, setIsFav ] = useState(false);
 	const closeCard = useContext(FnCloseCardContext);
-	const favorites = useSelector((state) => state.favorites);
+	const allFavorites = useSelector((state) => state.allFavorites);
 	
 	const handleFavorite = () => {
 		if (isFav) {
@@ -23,10 +23,10 @@ const Card = (props) => {
 	};
 
 	useEffect(() => {
-		for (let f = 0; f < favorites.length; f++) {
-			if (favorites[f].id === id) setIsFav(true);
+		for (let f = 0; f < allFavorites.length; f++) {
+			if (allFavorites[f].id === id) setIsFav(true);
 		}
-	}, [favorites]);
+	}, [allFavorites]);
 
 	return (
 		<ArticleCard>
