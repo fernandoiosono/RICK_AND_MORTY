@@ -1,8 +1,7 @@
-import { Nav, Favorites, Cards, About, Login, CardDetail, PageNotFound } from "../components";
-
 import styled from "styled-components";
-import { Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Routes, Route } from "react-router-dom";
+import { Nav, Favorites, Cards, About, Login, CardDetail, PageNotFound } from "../components";
 
 const App = () => {
 	const userIsAuth = useSelector((state) => state.userIsAuth);

@@ -65,6 +65,7 @@ const rootReducer = (state = initialState, action) => {
 				characterDetail: {},
 				allFavorites: [],
 				favorites: [] };
+				
 		default:
 			return { ...state };
 	};

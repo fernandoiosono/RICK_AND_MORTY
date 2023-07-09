@@ -20,7 +20,12 @@ export const addCharacter = (id) => {
 			.then((data) =>
 				dispatch({
 					type: actionType.ADD_CHARACTER,
-					payload: { id: data.id, name: data.name, image: data.image, gender: data.gender }
+					payload: { 
+						id: data.id, 
+						name: data.name, 
+						image: data.image, 
+						gender: data.gender 
+					}
 				})
 			);
 	};
@@ -60,7 +65,12 @@ export const delCharacter = (id) => {
 export const addFavorite = (id, name, image, gender) => {
 	return {
 		type: actionType.ADD_FAVORITE,
-		payload: { id: id, name: name, image: image, gender: gender }
+		payload: { 
+			id: id, 
+			name: name, 
+			image: image, 
+			gender: gender 
+		}
 	};
 };
 

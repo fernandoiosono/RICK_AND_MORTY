@@ -1,17 +1,17 @@
 export const errorLoginForm = (userData, errors, dbDataUser) => {
     let error = "";
 
-    const countEmptyFields = (Object.values(userData).filter(elmnt => elmnt === "").length);
     const countErrors = (Object.values(errors).filter(elmnt => elmnt !== "").length);
-
+    const countEmptyFields = (Object.values(userData).filter(elmnt => elmnt === "").length);
+    
     if (countEmptyFields > 0) {
-        error = "Por Favor Llene Todos Los Campos";
+        error = "Please Fill All Fields!";
     } else if (countErrors > 0) {
-        error = "Corrija los Datos del Formulario, para Poder Continuar";
+        error = "Correct The Form Data To Continue!";
     } else if (userData.email !== dbDataUser.email) {
-        error = "Usuario No Encontrado :("
+        error = "User (E-Mail) Not Found! :("
     } else if (userData.password !== dbDataUser.password) {
-        error = "La Contraseña es Incorrecta :("
+        error = "Incorrect Password! :("
     }
 
     return error;
@@ -22,19 +22,39 @@ export const validateLoginUserData = (userData, property, setErrors, errors) => 
     const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{3}$/i;
 
     if (!userData[property]) {
-        error = `Por favor ingresa el ${property}!`;
+        error = `Plase Enter The ${property}!`;
     } else {
         switch (property) {
             case "email":
-                if (!regexEmail.test(userData[property])) error = "La esctructura del E-Mail es incorrecta!";
-                    else if (userData[property].length > 35) error = "El E-Mail no puedo ser mayor a 35 caracteres!";
+                if (!regexEmail.test(userData[property])) error = "The E-Mail Structure Is Incorrect!";
+                    else if (userData[property].length > 35) error = "The E-Mail Cannot Be Longer Than 35 Characters!";
                 break;
             case "password":
-                if (userData[property].length < 6 || userData[property].length > 10) error = "El password debe de contener de 6 a 10 caracteres!";
-                    else if (userData[property].replace(/[^0-9]/g, "").length === 0) error = "El password debe contener al menos un número!";
+                if (userData[property].length < 6 || userData[property].length > 10) error = "The Password Must Contain 6 To 10 Characters!";
+                    else if (userData[property].replace(/[^0-9]/g, "").length === 0) error = "The Password Must Contain At Least One Number!";
                 break;
         }
     }
 
     setErrors({ ...errors, [property]: error });
+};
+
+export const validateNewIDChar = (id, allCharacters) => {
+    let order = "Enter A Number From 1 To 826!";
+
+    switch (true) {
+        case isNaN(id):
+            alert(`This Field Only Accepts Numbers At The Moment. \n ${order}`);
+            return false;
+
+        case id < 1 || id > 826:
+            alert(`${order}`);
+            return false;
+
+        case allCharacters.filter((char) => char.id == id).length > 0:
+            alert("The Entered Character Already Exists, Enter Another!");
+            return false;
+    }
+
+    return true;
 };

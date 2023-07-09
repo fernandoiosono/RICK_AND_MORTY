@@ -45,7 +45,7 @@ const Card = (props) => {
 					fatherComp === "cards" ? (
 						<>
 							<ButtonFavMate onClick={handleFavorite}>{ isFav ? "❤️" : "🖤" }</ButtonFavMate>
-							<ButtonClose onClick={handleDelCharacter}>❌</ButtonClose>	
+							<ButtonDelete onClick={handleDelCharacter}>❌</ButtonDelete>	
 						</>
 					) : ( // fatherComp === "favorites"
 						<ButtonFavAlone onClick={handleFavorite}>{ isFav ? "❤️" : "🖤" }</ButtonFavAlone>
@@ -96,7 +96,6 @@ const Button = styled.button`
 
 const ButtonFavAlone = styled(Button)`
 	width: 100%;
-	/* border-right: none; */
 	border-radius: 5px;
 `;
 
@@ -106,7 +105,7 @@ const ButtonFavMate = styled(Button)`
 	border-radius: 5px 0 0 5px;
 `;
 
-const ButtonClose = styled(Button)`
+const ButtonDelete = styled(Button)`
 	width: 50%;
 	border-radius: 0 5px 5px 0;
 `;

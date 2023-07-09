@@ -1,15 +1,15 @@
 import { useEffect } from "react";
+import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { setCharacterDetail, cleanDetail } from "../redux/actions";
 
 const CardDetail = () => {
     const dispatch = useDispatch();
-    const character = useSelector((state) => state.characterDetail)
     const navigate = useNavigate();
     const { fatherComp, id } = useParams();
-
+    const character = useSelector((state) => state.characterDetail)
+    
     useEffect(() => {
         dispatch(setCharacterDetail(id));
 
@@ -71,13 +71,9 @@ const CardDetail = () => {
     );
 };
 
-const DivFlex = styled.div`
-    display: flex;
-`;
+const DivFlex = styled.div` display: flex; `;
 
-const DivRow = styled(DivFlex)`
-    flex-direction: row;
-`;
+const DivRow = styled(DivFlex)` flex-direction: row; `;
 
 const DivColumn = styled(DivFlex)`
     flex-direction: column;
@@ -114,13 +110,9 @@ const ArticleDetail = styled(Article)`
     &:hover { background: rgba(255, 255, 255, 1); }
 `;
 
-const ArticleWMargin = styled(ArticleDetail)`
-    margin-top: 10px;
-`;
+const ArticleWMargin = styled(ArticleDetail)` margin-top: 10px; `;
 
-const ArticleEmpty = styled(Article)`
-    margin-top: 10px;
-`;
+const ArticleEmpty = styled(Article)` margin-top: 10px; `;
 
 const ImgChar = styled.img`
     width: 70%;
@@ -141,6 +133,7 @@ const ButtonBack = styled.button`
         cursor: pointer;
     }
 `;
+
 const PData = styled.p`
     margin-left: 10px; 
     font-size: 20px; 

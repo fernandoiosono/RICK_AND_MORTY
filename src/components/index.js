@@ -1,4 +1,5 @@
 import About from "./About.jsx";
+import App from "./App.jsx";
 import Card from "./Card.jsx";
 import CardDetail from "./CardDetail.jsx";
 import Cards from "./Cards.jsx";
@@ -10,6 +11,7 @@ import SearchBar from "./SearchBar.jsx";
 
 export { 
     About, 
+    App,
     Card,
     CardDetail, 
     Cards, 

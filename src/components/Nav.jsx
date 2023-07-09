@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import SearchBar from "./SearchBar.jsx";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { SearchBar } from "../components";
 import { cleanFilterFavorites, cleanState } from "../redux/actions.js";
 
 const Nav = () => {
@@ -20,16 +20,16 @@ const Nav = () => {
         <Navigation>
             <ArticleLinks>
                 <Link to="/home" style={{ textDecoration: 'none', color: 'black' }}>
-                    <H4Home>Home</H4Home>
+                    <H4Before>Home</H4Before>
                 </Link>
                 <Link to="/favorites" style={{ textDecoration: 'none' }}>
-                    <H4About onClick={handleFavorites}>❤️</H4About>
+                    <H4Before onClick={handleFavorites}>❤️</H4Before>
                 </Link>
                 <Link to="/about" style={{ textDecoration: 'none', color: 'black' }}>
-                    <H4About>About</H4About>
+                    <H4Before>About</H4Before>
                 </Link>
                 <Link to="/" style={{ textDecoration: 'none' }}>
-                    <H4LogOut onClick={handleLogOut}>💣</H4LogOut>
+                    <H4Last onClick={handleLogOut}>💣</H4Last>
                 </Link>
             </ArticleLinks>
             <ArticleSearch>
@@ -48,26 +48,29 @@ const Navigation = styled.nav`
     align-items: center;
 `;
 
-const ArticleLinks = styled.article`
+const Article = styled.article` display: flex; `;
+
+const ArticleLinks = styled(Article)`
     width: 30%;
-    display: flex;
     justify-content: left;
 `;
 
-const ArticleSearch = styled.article`
+const ArticleSearch = styled(Article)`
     width: 70%;
-    display: flex;
     justify-content: right;
 `;
 
-const H4Home = styled.h4`
-    margin-right: 10px;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 3px 20px 3px 20px;
+const H4 = styled.h4`
     height: 25px;
-    align-items: center;
     display: flex;
+    border-radius: 5px;
+    align-items: center;
+    border: 2px solid black;
+    padding: 3px 20px 3px 20px;
+`;
+
+const H4Before = styled(H4)`
+    margin-right: 10px;
 
     &:hover {
         background-color: white;
@@ -75,31 +78,9 @@ const H4Home = styled.h4`
     }
 `;
 
-const H4About = styled.h4`
-    margin-right: 10px;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 3px 20px 3px 20px;
-    height: 25px;
-    align-items: center;
-    display: flex;
-
+const H4Last = styled(H4)`
     &:hover {
-        background-color: white;
-        cursor: pointer;
-    }
-`;
-
-const H4LogOut = styled.h4`
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 3px 20px 3px 20px;
-    height: 25px;
-    align-items: center;
-    display: flex;
-
-    &:hover {
-        background-color: red;
+        background-color: #fe3e3e;
         color: white;
         cursor: pointer;
     }

@@ -1,10 +1,11 @@
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { addCharacter } from "../redux/actions.js";
 import { useRef } from "react";
+import styled from "styled-components";
+import { addCharacter } from "../redux/actions.js";
+import { useDispatch, useSelector } from "react-redux";
+import { validateNewIDChar } from "../js/validations.js";
 
 const SearchBar = () => {
-    let inputVal;
+    let idChar;
     const dispatch = useDispatch();
     const inputSearch = useRef(null);
 	const allCharacters = useSelector((state) => state.allCharacters);
@@ -15,37 +16,17 @@ const SearchBar = () => {
 	};
 
 	const handleChangeID = (e) => {
-		inputVal = e.target.value;
+		idChar = e.target.value;
 	};
 
 	const handleAddChar = () => {
-		if (validateChar()) dispatch(addCharacter(inputVal));
+		if (validateNewIDChar(idChar, allCharacters)) dispatch(addCharacter(idChar));
 
 		cleanInput(); // Clean de input no matter what happens before
 	};
 
 	const handleKeyDown = (e) => {
 		if (e.key === "Enter") handleAddChar();
-	};
-
-	const validateChar = () => {
-		let order = "Ingresa un número del 1 al 826.";
-
-		switch (true) {
-			case isNaN(inputVal):
-				alert(`Este campo sólo acepta números por el momento. \n ${order}`);
-				return false;
-
-			case inputVal < 1 || inputVal > 826:
-				alert(`${order}`);
-				return false;
-
-			case allCharacters.filter((char) => char.id == inputVal).length > 0:
-				alert("El personaje seleccionado ya existe, selecciona otro.");
-				return false;
-		}
-
-		return true;
 	};
 
 	return (<>

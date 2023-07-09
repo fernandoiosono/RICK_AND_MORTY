@@ -1,4 +1,4 @@
-import Card from "./Card.jsx";
+import { Card } from "../components";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
@@ -15,7 +15,7 @@ const Cards = () => {
 						name: c.name,
 						image: c.image,
 						gender: c.gender,
-						fatherComp: "cards",
+						fatherComp: "cards"
 					}}
 				/>
 			))}
