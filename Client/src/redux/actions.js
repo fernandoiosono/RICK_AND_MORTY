@@ -1,6 +1,7 @@
 import * as actionType from "./actionTypes.js";
 
-const urlInfoChar = "https://rickandmortyapi.com/api/character/";
+// const urlInfoChar = "https://rickandmortyapi.com/api/character/";
+const urlInfoChar = "http://localhost:3001/character/";
 
 const formatUnknown = (param) => {
     return (!param || param === "unknown") ? "Unknown" : param;
@@ -17,7 +18,7 @@ export const addCharacter = (id) => {
 	return function (dispatch) {
 		fetch(urlInfoChar + id)
 			.then((response) => response.json())
-			.then((data) =>
+			.then((data) => 
 				dispatch({
 					type: actionType.ADD_CHARACTER,
 					payload: { 
@@ -35,7 +36,7 @@ export const setCharacterDetail = (id) => {
     return function (dispatch) {
         fetch(urlInfoChar + id)
             .then((response) => response.json())
-            .then((data) =>
+            .then((data) => 
                 dispatch({
                     type: actionType.SET_CHARACTER_DETAIL,
                     payload: {
