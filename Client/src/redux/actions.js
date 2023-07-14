@@ -1,7 +1,7 @@
 import * as actionType from "./actionTypes.js";
 
 // const urlInfoChar = "https://rickandmortyapi.com/api/character/";
-const urlInfoChar = "http://localhost:3001/character/";
+const urlInfoChar = "http://localhost:3001/rickandmorty/character/";
 
 const formatUnknown = (param) => {
     return (!param || param === "unknown") ? "Unknown" : param;
