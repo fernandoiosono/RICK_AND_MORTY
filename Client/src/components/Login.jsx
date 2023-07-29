@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
@@ -10,7 +11,6 @@ const Login = () => {
 	const dispatch = useDispatch();
 	const [errors, setErrors] = useState({ email: "", password: "" });
 	const [userData, setUserData] = useState({ email: "", password: "" });
-	const dbDataUser = { email: "fernandoiosono@gmail.com", password: "admin123" };
 
 	const handleInputChange = (e) => {
 		const property = e.target.name,
@@ -25,14 +25,24 @@ const Login = () => {
 	};
 
 	const handleSubmit = (e) => {
-		const errorForm = errorLoginForm(userData, errors, dbDataUser);
-
 		e.preventDefault();
 
+		const { email, password } = userData;
+    	const URL = "http://localhost:3001/rickandmorty/login";
+
+		const errorForm = errorLoginForm(userData, errors);
+
 		if (errorForm === "") {
-			// Si no hay error en el formulario, permite el acceso
-			dispatch(userAuthentication(true));
-			navigate("/home");
+			axios(URL + `?email=${email}&password=${password}`)
+				.then(({ data }) => {
+					if (data.access) {
+						// Si existe el usuario en la base de datos, se permite el acceso.
+						dispatch(userAuthentication(true));
+						navigate("/home");
+					} else {
+						alert('User Not Found');
+					} 
+				})
 		} else {
 			alert(errorForm);
 		}

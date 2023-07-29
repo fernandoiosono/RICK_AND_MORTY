@@ -1,22 +1,3 @@
-export const errorLoginForm = (userData, errors, dbDataUser) => {
-    let error = "";
-
-    const countErrors = (Object.values(errors).filter(elmnt => elmnt !== "").length);
-    const countEmptyFields = (Object.values(userData).filter(elmnt => elmnt === "").length);
-    
-    if (countEmptyFields > 0) {
-        error = "Please Fill All Fields!";
-    } else if (countErrors > 0) {
-        error = "Correct The Form Data To Continue!";
-    } else if (userData.email !== dbDataUser.email) {
-        error = "User (E-Mail) Not Found! :("
-    } else if (userData.password !== dbDataUser.password) {
-        error = "Incorrect Password! :("
-    }
-
-    return error;
-};
-
 export const validateLoginUserData = (userData, property, setErrors, errors) => {
     let error = "";
     const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{3}$/i;
@@ -37,6 +18,27 @@ export const validateLoginUserData = (userData, property, setErrors, errors) => 
     }
 
     setErrors({ ...errors, [property]: error });
+};
+
+export const errorLoginForm = (userData, errors) => {
+// export const errorLoginForm = (userData, errors, dbDataUser) => {
+    let error = "";
+
+    const countErrors = (Object.values(errors).filter(elmnt => elmnt !== "").length);
+    const countEmptyFields = (Object.values(userData).filter(elmnt => elmnt === "").length);
+
+    if (countEmptyFields > 0) {
+        error = "Please Fill All Fields!";
+    } else if (countErrors > 0) {
+        error = "Correct The Form Data To Continue!";
+    }
+    // } else if (userData.email !== dbDataUser.email) {
+    //     error = "User (E-Mail) Not Found! :("
+    // } else if (userData.password !== dbDataUser.password) {
+    //     error = "Incorrect Password! :("
+    // }
+
+    return error;
 };
 
 export const validateNewIDChar = (id, allCharacters) => {

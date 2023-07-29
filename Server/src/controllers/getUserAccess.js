@@ -7,7 +7,7 @@ const getUserAccess = (req, res) => {
 
     return (user)
         ? res.status(200).json({ access: true })
-        : res.status(403).json({ access: false });
+        : res.status(200).json({ access: false });
 };
 
 module.exports = getUserAccess;
