@@ -1,17 +1,41 @@
-const http = require("http");
-const getCharByID = require("./controllers/getCharByID.js");
+const router = require('./routes/index.js');
+const express = require("express");
+const morgan = require("morgan");
+const cors = require('cors');
 
-http.createServer((req, res) => {
-	const { url } = req;
+const PORT = 3001;
+const server = express();
 
-	res.setHeader("Access-Control-Allow-Origin", "*");
+server.use(morgan("dev"));
+server.use(cors());
+// server.use((req, res, next) => {
+// 	res.header("Access-Control-Allow-Origin", "*");
+// 	res.header("Access-Control-Allow-Credentials", "true");
+// 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+// 	res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+// 	next();
+// });
+server.use(express.json());
+server.use('/rickandmorty', router);
 
-	if (url.indexOf("/rickandmorty/character") !== -1) {
-		const id = parseInt(url.split("/").pop());
+server.listen(PORT, () => {
+	console.log(`Server raised in port: ${PORT}`);
+});
 
-		return getCharByID(res, id);
-	}
+// const http = require("http");
+// const getCharByID = require("./controllers/getCharByID.js");
 
-	res.writeHead(404);
-	res.end();
-}).listen(3001, "localhost");
+// http.createServer((req, res) => {
+// 	const { url } = req;
+
+// 	res.setHeader("Access-Control-Allow-Origin", "*");
+
+// 	if (url.indexOf("/rickandmorty/character") !== -1) {
+// 		const id = parseInt(url.split("/").pop());
+
+// 		return getCharByID(res, id);
+// 	}
+
+// 	res.writeHead(404);
+// 	res.end();
+// }).listen(3001, "localhost");
