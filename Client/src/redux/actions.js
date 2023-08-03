@@ -1,3 +1,4 @@
+import axios from "axios";
 import * as actionType from "./actionTypes.js";
 
 // const urlInfoChar = "https://rickandmortyapi.com/api/character/";
@@ -64,15 +65,32 @@ export const delCharacter = (id) => {
 };
 
 export const addFavorite = (id, name, image, gender) => {
-	return {
-		type: actionType.ADD_FAVORITE,
-		payload: { 
-			id: id, 
-			name: name, 
-			image: image, 
-			gender: gender 
-		}
-	};
+	const endPoint = "http://localhost:3001/rickandmorty/fav";
+	const character = { 
+		id: id, 
+		name: name, 
+		image: image, 
+		gender: gender 
+	}
+
+	return (dispatch) => {
+		axios.post(endPoint, character)
+			.then(({ data }) => {
+				return dispatch({
+					type: actionType.ADD_FAVORITE,
+					payload: data
+				});
+			})
+	}
+	// return {
+	// 	type: actionType.ADD_FAVORITE,
+	// 	payload: { 
+	// 		id: id, 
+	// 		name: name, 
+	// 		image: image, 
+	// 		gender: gender 
+	// 	}
+	// };
 };
 
 export const delFavorite = (id) => {

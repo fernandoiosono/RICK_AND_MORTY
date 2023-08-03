@@ -31,8 +31,11 @@ const rootReducer = (state = initialState, action) => {
 
 		case actionType.ADD_FAVORITE:
 			return { ...state, 
-				allFavorites: [...state.allFavorites, action.payload],
-				favorites: [...state.allFavorites, action.payload] };
+				favorites: action.payload,
+				allFavorites: action.payload };
+			// return { ...state, 
+			// 	allFavorites: [...state.allFavorites, action.payload],
+			// 	favorites: [...state.allFavorites, action.payload] };
 
 		case actionType.DEL_FAVORITE:
 			return { ...state, 

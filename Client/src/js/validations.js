@@ -21,7 +21,6 @@ export const validateLoginUserData = (userData, property, setErrors, errors) => 
 };
 
 export const errorLoginForm = (userData, errors) => {
-// export const errorLoginForm = (userData, errors, dbDataUser) => {
     let error = "";
 
     const countErrors = (Object.values(errors).filter(elmnt => elmnt !== "").length);
@@ -32,11 +31,6 @@ export const errorLoginForm = (userData, errors) => {
     } else if (countErrors > 0) {
         error = "Correct The Form Data To Continue!";
     }
-    // } else if (userData.email !== dbDataUser.email) {
-    //     error = "User (E-Mail) Not Found! :("
-    // } else if (userData.password !== dbDataUser.password) {
-    //     error = "Incorrect Password! :("
-    // }
 
     return error;
 };
