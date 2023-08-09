@@ -1,11 +1,17 @@
+require('dotenv').config();
+
 const axios = require('axios');
-const { response } = require('express');
-const urlAPI = "https://rickandmortyapi.com/api/character/";
+// const { response } = require('express');
+// const urlAPI = "https://rickandmortyapi.com/api/character/";
+const { URL_API_CHARACTER } = process.env;
 
-const getCharByID = (req, res) => {
-    const { id } = req.params;
+// const getCharByID = (req, res) => {
+const getCharByID = (id) => {
+    // const { id } = req.params;
 
-    axios(`${urlAPI}${id}`)
+    console.log(URL_API_CHARACTER);
+
+    axios(`${URL_API_CHARACTER}/${id}`)
         .then(({ data }) => {
             const { id, name, gender, species, 
                 origin, location, 
@@ -15,14 +21,18 @@ const getCharByID = (req, res) => {
                 origin, location, 
                 image, status };
 
-            return obj.name 
-                ? res.status(200).json(obj)
-                : res.status(404).send('Character Not Found');
+            if (obj.name) return obj;
+                else throw new Error('Character Not Found');
+
+            // return obj.name 
+            //     ? res.status(200).json(obj)
+            //     : res.status(404).send('Character Not Found');
                 
         })
         .catch((error) => {
             // res.status(500).json({ error: error.message });
-            res.status(500).send(error.message);
+            // res.status(500).send(error.message);
+            throw new Error(error.message);
         })
 };
 
