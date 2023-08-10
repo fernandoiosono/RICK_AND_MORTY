@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const cors = require('cors');
 const morgan = require('morgan');
-const server = require('./src/server.js');
+const server = require('./server.js');
 
 const { handleUsers, 
 	handleFavorites, 
