@@ -2,13 +2,13 @@ require('dotenv').config();
 
 const cors = require('cors');
 const morgan = require('morgan');
-const server = require('./server.js');
+const server = require('./src/server.js');
 
 const { handleUsers, 
 	handleFavorites, 
-	handleCharacters } = require('./src/routes');
+	handleCharacters } = require('./src/routes/index.js');
 
-const LOCALHOST_PORT = process.env.LOCALHOST_PORT;
+const { LOCALHOST_PORT } = process.env;
 
 server.use(cors());
 server.use(morgan("dev"));
