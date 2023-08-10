@@ -1,10 +1,21 @@
-const getCharByID = require('./getCharByID.js');
-const getUserAccess = require('./getUserAccess.js');
-const { postFav, deleteFav } = require('./handleFavorites.js');
+const delCharacter = require('./Characters/delCharacter.js');
+const getCharacters = require('./Characters/getCharacters.js');
+const getCharByID = require('./Characters/getCharByID.js');
+const postCharacter = require('./Characters/postCharacter.js');
+
+const delFavorite = require('./Favorites/delFavorite.js');
+const getFavorites = require('./Favorites/getFavorites.js');
+const postFavorite = require('./Favorites/postFavorite.js');
+
+const getUserAccess = require('./Users/getUserAccess.js');
 
 module.exports = {
+    delCharacter,
+    getCharacters,
     getCharByID,
-    getUserAccess,
-    postFav,
-    deleteFav
+    postCharacter,
+    delFavorite,
+    getFavorites,
+    postFavorite,
+    getUserAccess
 };

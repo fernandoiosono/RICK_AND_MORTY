@@ -4,8 +4,6 @@ const { getCharByID } = require('../controllers/index.js');
 router.get('/character/:id', (req, res) => {
     const { id } = req.params;
 
-    console.log(id);
-
     try {
         const character = getCharByID(id);
 
