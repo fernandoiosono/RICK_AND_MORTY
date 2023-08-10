@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { getUserAccess } = require('../controllers/index.js');
 
-router.get('/login', (req, res) => {
+router.get('/access', (req, res) => {
     const { email, password } = req.query;
 
     try {
