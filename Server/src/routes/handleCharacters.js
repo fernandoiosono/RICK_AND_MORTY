@@ -1,16 +1,12 @@
 const router = require('express').Router();
 const { getCharByID } = require('../controllers/index.js');
+const errorHandler = require('../middlewares/errorHandler.js');
 
-router.get('/character/:id', (req, res) => {
+router.get('/:id', errorHandler(async (req, res) => {
     const { id } = req.params;
+    const character = await getCharByID(id);
 
-    try {
-        const character = getCharByID(id);
-
-        res.status(200).json(character);
-    } catch(error) {
-        res.status(400).json({ error: error.message });
-    };
-});
+    res.status(200).json(character);
+}));
 
 module.exports = router;
