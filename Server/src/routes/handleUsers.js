@@ -1,16 +1,25 @@
 const router = require('express').Router();
-const { getUserAccess } = require('../controllers/index.js');
+const { getUsers, getUserAccess, postUser } = require('../controllers');
+const errorHandler = require('../middlewares/errorHandler.js');
 
-router.get('/access', (req, res) => {
+router.get('/all', errorHandler(async (req, res) => {
+    const users = await getUsers();
+
+    res.status(200).json({ users: users });
+}));
+
+router.get('/access', errorHandler((req, res) => {
     const { email, password } = req.query;
+    const access = getUserAccess(email, password);
 
-    try {
-        const access = getUserAccess(email, password);
+    res.status(200).json({ access: access });
+}));
 
-        res.status(200).json({ access: access });
-    } catch(error) {
-        res.status(400).json({ error: error.message });
-    }
-});
+router.post('/user', errorHandler(async (req, res) => {
+    const { email, password } = req.body;
+    const newUser = await postUser({ email, password });
+
+    res.status(200).json(newUser);
+}));
 
 module.exports = router;
