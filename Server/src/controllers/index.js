@@ -8,6 +8,8 @@ const getFavorites = require('./Favorites/getFavorites.js');
 const postFavorite = require('./Favorites/postFavorite.js');
 
 const getUserAccess = require('./Users/getUserAccess.js');
+const getUsers = require('./Users/getUsers.js');
+const postUser = require('./Users/postUser.js');
 
 module.exports = {
     delCharacter,
@@ -17,5 +19,7 @@ module.exports = {
     delFavorite,
     getFavorites,
     postFavorite,
-    getUserAccess
+    getUserAccess,
+    getUsers,
+    postUser
 };
