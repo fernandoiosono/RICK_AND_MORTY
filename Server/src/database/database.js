@@ -20,14 +20,16 @@ Users.belongsToMany(Characters, {
     through: "Favorites",
     foreignKey: "idUser",
     otherKey: "idCharacter",
-    as: "characters"
+    as: "characters",
+    timestamps: false
 });
 
 Characters.belongsToMany(Users, { 
     through: "Favorites",
     foreignKey: "idCharacter",
     otherKey: "idUser",
-    as: "users" 
+    as: "users",
+    timestamps: false
 });
 
 module.exports = {

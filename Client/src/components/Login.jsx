@@ -28,7 +28,7 @@ const Login = () => {
 		e.preventDefault();
 
 		const { email, password } = userData;
-    	const URL = "http://localhost:3001/rickandmorty/login";
+    	const URL = "http://localhost:3001/rickandmorty/users/access";
 
 		const errorForm = errorLoginForm(userData, errors);
 

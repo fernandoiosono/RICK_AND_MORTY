@@ -2,7 +2,7 @@ import axios from "axios";
 import * as actionType from "./actionTypes.js";
 
 // const urlInfoChar = "https://rickandmortyapi.com/api/character/";
-const urlInfoChar = "http://localhost:3001/rickandmorty/character/";
+const urlInfoChar = "http://localhost:3001/rickandmorty/characters/";
 
 const formatUnknown = (param) => {
     return (!param || param === "unknown") ? "Unknown" : param;
@@ -65,7 +65,7 @@ export const delCharacter = (id) => {
 };
 
 export const addFavorite = (id, name, image, gender) => {
-	const endPoint = "http://localhost:3001/rickandmorty/fav";
+	const endPoint = "http://localhost:3001/rickandmorty/favorites";
 	const character = { 
 		id: id, 
 		name: name, 
